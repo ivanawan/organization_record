@@ -1,0 +1,19 @@
+#content{
+    height:90vh; 
+    width:100%;
+    margin-left:15vw;
+    position: relative; 
+    background-color:blue;
+    padding-top:1rem;
+    overflow: auto;
+}
+#side-bar{
+    height:90vh;
+    width:15vw;
+    background-color: red;
+    float:left;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
