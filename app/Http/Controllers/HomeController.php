@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use  App\Http\Controllers\QueryController; 
 
 class HomeController extends Controller
 {
@@ -12,7 +13,8 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct()
-    {
+    { 
+        $this->Query = new QueryController;
         $this->middleware('auth');
     }
 
@@ -25,4 +27,6 @@ class HomeController extends Controller
     {
         return view('home');
     }
+   
+    
 }

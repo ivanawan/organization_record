@@ -23,3 +23,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/layout' , function (){
     return view('layouts.layout');
 });
+// Route::get('/new_user',function (){
+    // return view('newuser.new_user');
+// })->name('new_user');
+Route::get('/new_group', function(){
+return view('newuser.new_group');
+});
+// Route::post('/new_user',[App\Http\Controllers\newUserController::class, 'new_user']);
+Route::post('/new_group',[App\Http\Controllers\newUserController::class, 'newGroup']);
