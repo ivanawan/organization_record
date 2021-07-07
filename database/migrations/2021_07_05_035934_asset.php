@@ -14,7 +14,7 @@ class Asset extends Migration
     public function up()
     {
         Schema::create('tb_asset', function (Blueprint $table) {
-            $table->integer('id');
+            $table->id();
             $table->string('name');
             $table->string('keterangan')->nullable();
             $table->timestamps();

@@ -14,6 +14,7 @@ class LogGroup extends Migration
     public function up()
     {
         Schema::create('log_group', function (Blueprint $table) {
+            $table->id();
             $table->string('id_group');
             $table->integer('user_id');
             $table->string('table');

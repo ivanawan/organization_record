@@ -17,17 +17,19 @@
     <strong>{{ $msg }}</strong>
 </div>
 @endif
+<form method="POST" action="{{ url('/new_group') }}">
                   @csrf
-  <a href="{{url('/resubmit')}}">resubmit code?</a>                
+                  
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Nama Group</label>
     <input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label">Deskripsi Group</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <a href="{{url('/code_group')}}" class="btn btn-primary">code group</a>
+  <button type="submit" class="btn btn-primary">Next -></button>
 </form>
                 </div>
             </div>

@@ -14,7 +14,8 @@ class Keuangan extends Migration
     public function up()
     {
         Schema::create('tb_keuangan', function (Blueprint $table) {
-            $table->string('id');
+            $table->id();
+            $table->integer('id_group');
             $table->string('iden');
             $table->boolean('role');
             $table->string('keterangan')->nullable();

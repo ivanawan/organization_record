@@ -14,6 +14,7 @@ class PesertaAcara extends Migration
     public function up()
     {
         Schema::create('tb_peserta', function (Blueprint $table) {
+            $table->id();
             $table->integer('id_acara');
             $table->integer('id_user');
             $table->boolean('berangkat');

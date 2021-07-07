@@ -14,8 +14,10 @@ class Group extends Migration
     public function up()
     {
         Schema::create('tb_group', function (Blueprint $table) {
-            $table->string('id');
+            $table->id();
+            $table->string('code');
             $table->string('name');
+            $table->text('desc');
             $table->timestamps();
             });
     }

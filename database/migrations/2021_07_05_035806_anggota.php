@@ -14,9 +14,9 @@ class Anggota extends Migration
     public function up()    {
         Schema::create('tb_anggota', function (Blueprint $table) {
         $table->id();
-        $table->string('id_group')->nullable();
+        $table->integer('id_group');
         $table->integer('id_user');
-        $table->integer('role')->nullable();
+        $table->integer('role');
         $table->timestamps();
         });
     }
