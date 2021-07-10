@@ -13,12 +13,13 @@ class newUserController extends Controller
         $this->Query = new QueryController;
         $this->Logic = new logicController;
         $this->middleware('auth');
+        
     }
      
     
     public function newGroup(Request $request){
         
-        $request['id']=$this->Logic->randstring(20);
+        $request['code']=$this->Logic->randstring(20);
         $id=$this->Query->insertData('tb_group',$request->except(['_token']));
         $this->Query->insertData('tb_anggota',
         ['id_group'=>$id,'id_user'=>Auth::id(),'role'=>1]);
@@ -26,16 +27,15 @@ class newUserController extends Controller
       }
 
     public function codeGroup(Request $request){
-        // dd($request->all());
-        if($this->Query->checkData(['tb_group','id',$request->input('id_group'),0])){
-            $this->Query->insertData('tb_waitinglist',
-            ['id_group'=>$request->input('id_group'),'id_user'=>Auth::id()]);
+        
+        if($data=$this->Query->checkData(['tb_group','code',$request->input('id_group'),1])){
+            $this->Query->insertData('tb_waitinglist',['id_group'=>$data->id,'id_user'=> Auth::id()]);
               $msg=['scc'=>' successfull wait the admin add to group'];
         }else{
              $msg=['err'=>'token not found'];
           return redirect('/new_group')->with($msg);
         }
 
-    return redirect('/home')->with($msg);
+    return redirect('/waiting')->with($msg);
     }  
 }

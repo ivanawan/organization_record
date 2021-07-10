@@ -29,16 +29,20 @@ Route::get('/new_group',function (){
 Route::get('/code_group', function(){
     return view('newuser.code_group');
 });
+Route::get('/waiting', function(){
+    return view('newuser.waiting');
+});
 Route::post('/home-{$page}',[App\Http\Controllers\newUserController::class, 'selectHome']);
 Route::post('/new_group',[App\Http\Controllers\newUserController::class, 'newGroup'])->name('newGroup');
 Route::post('/code_group',[App\Http\Controllers\newUserController::class,'codeGroup']);
-Route::get('/homeset',[App\Http\Controllers\HomeController::class, 'homeSet'])->name('homeSet');
+// Route::get('/homeset',[App\Http\Controllers\HomeController::class, 'homeSet'])->name('homeSet');
 //route menu
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/event',[App\Http\Controllers\EventController::class, 'index']);
 Route::get('/keuangan',[App\Http\Controllers\KeuanganController::class, 'index']);
 Route::get('/group',[App\Http\Controllers\GroupController::class, 'index']);
-Route::get('/Agenda',[App\Http\Controllers\AgendaController::class, 'index']);
+Route::get('/agenda',[App\Http\Controllers\AgendaController::class, 'index']);
 Route::get('/task',[App\Http\Controllers\TaskController::class, 'index']);
+
 

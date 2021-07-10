@@ -14,6 +14,6 @@ class GroupController extends Controller
         $this->session = session()->get('group');
     }
     public function index(){
-
+        return view('group');
     }
 }

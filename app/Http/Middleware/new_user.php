@@ -17,11 +17,13 @@ class new_user
      */
     public function handle(Request $request, Closure $next)
     {   
-        $query=QueryController;
+        $query=new QueryController;
         if($query->checkData(['tb_anggota','id_user',Auth::id(),0])){
-          return redirect('/home');
-        }else{
             return $next($request);
+        }elseif($query->checkData(['tb_waitinglist','id_user',Auth::id(9),0])){
+        return redirect('/waiting');
+        }else{
+            return redirect('/new_group');
         }
 
     }

@@ -21,15 +21,14 @@ class QueryController extends Controller
     
     
     public function insertData($table,$data){
-      $id=DB::table($table)->insertGetId($data);
-      return $id;
+     return  DB::table($table)->insertGetId($data);
+      
     }
     public function updateData($table,$column,$param,$data){
       DB::table($table)->where($column,$param)->update($data);
     }
     public function getFrist($table,$column,$param){
-       $d=DB::table($table)->where($column,$param)->first();
-       return $d;
+      return DB::table($table)->where($column,$param)->first();
     }
     public function deleteData($table,$param){
       DB::table($table)->where('id',$param)->delete();
@@ -37,4 +36,7 @@ class QueryController extends Controller
     public function getWhere($table,$column,$param){
       return DB::table($table)->where($column,$param)->get();
     }
+    public function getfristtoarray($table,$column,$param){
+      return DB::table($table)->where($column,$param)->get()->toArray();
+    } 
 }

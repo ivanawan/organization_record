@@ -15,6 +15,17 @@ class EventController extends Controller
     }
 
     public function index(){
+    //     $data=$this->Query->getWhere('tb_acara'
+    //     ,'id_group',session('group')['id_group']);
+    //    dd($data->isEmpty());
+        return view('event',['data'=>$this->Query->getWhere('tb_acara'
+        ,'id_group',session('group')['id_group'])]);
+    }
+
+    public function updateEvent(){
+
+    }
+    public function deleteEvent(){
 
     }
 }

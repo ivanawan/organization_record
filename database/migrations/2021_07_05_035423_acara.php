@@ -15,10 +15,12 @@ class Acara extends Migration
     {
         Schema::create('tb_acara', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_group');
             $table->string('name');
             $table->string('dimana');
             $table->text('deskripsi');
-            $table->date('kapan');
+            $table->date('waktu_awal');
+            $table->date('waktu_akhir')->nullable();
             $table->timestamps();
             });
     }
@@ -30,6 +32,6 @@ class Acara extends Migration
      */
     public function down()
     {
-        schema::dropIfExists('tb_acara');
+        schema::drop('tb_acara');
     }
 }
