@@ -16,7 +16,7 @@ class Keuangan extends Migration
         Schema::create('tb_keuangan', function (Blueprint $table) {
             $table->id();
             $table->integer('id_group');
-            $table->string('iden');
+            // $table->string('iden');
             $table->boolean('role');
             $table->string('keterangan')->nullable();
             $table->integer('jumlah');

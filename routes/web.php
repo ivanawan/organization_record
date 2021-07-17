@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Auth::routes();
+
+// route view yang tidak memerlukan controller
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-// Route::get('/layout' , function (){
-    // return view('layouts.layout');
-// });
 Route::get('/new_group',function (){
     return view('newuser.new_group');
 });
@@ -32,17 +32,21 @@ Route::get('/code_group', function(){
 Route::get('/waiting', function(){
     return view('newuser.waiting');
 });
+// route  creete new group and change session 
 Route::post('/home-{$page}',[App\Http\Controllers\newUserController::class, 'selectHome']);
 Route::post('/new_group',[App\Http\Controllers\newUserController::class, 'newGroup'])->name('newGroup');
 Route::post('/code_group',[App\Http\Controllers\newUserController::class,'codeGroup']);
-// Route::get('/homeset',[App\Http\Controllers\HomeController::class, 'homeSet'])->name('homeSet');
-//route menu
-
+// rote utama 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/event',[App\Http\Controllers\EventController::class, 'index']);
-Route::get('/keuangan',[App\Http\Controllers\KeuanganController::class, 'index']);
-Route::get('/group',[App\Http\Controllers\GroupController::class, 'index']);
-Route::get('/agenda',[App\Http\Controllers\AgendaController::class, 'index']);
-Route::get('/task',[App\Http\Controllers\TaskController::class, 'index']);
-
-
+Route::get('/event',[App\Http\Controllers\EventController::class, 'index'])->middleware('setsession');
+Route::get('/keuangan',[App\Http\Controllers\KeuanganController::class, 'index'])->middleware('setsession');
+Route::get('/group',[App\Http\Controllers\GroupController::class, 'index'])->middleware('setsession');
+Route::get('/task',[App\Http\Controllers\TaskController::class, 'index'])->middleware('setsession');
+// route support add / edit / delete for main route
+// event
+Route::post('/event/add',[App\Http\Controllers\EventController::class, 'addEvent']);
+// group
+Route::get('/group/delte/{id}',[App\Http\Controllers\GroupController::class, 'deletefromwaitinglist']);
+Route::get('/group/addtogroup/{id}',[App\Http\Controllers\GroupController::class, 'addtogroup']);
+// event
+Route::post('/keuangan/add',[App\Http\Controllers\KeuanganController::class, 'add']);

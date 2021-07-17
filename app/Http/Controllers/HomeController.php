@@ -28,7 +28,6 @@ class HomeController extends Controller
      */
     public function index()
     {   if( session('group') ? null : $this->homeSet());
-        // dd(session('group'));
         return view('home');
     }
    

@@ -2,9 +2,6 @@
 
 
 @section('content')
-<!-- <div class="container"> -->
-    <!-- <div class="row justify-content-center"> -->
-        <!-- <div class="col-md-8"> -->
             <div class="card">
                 <div class="card-header">
                  
@@ -23,11 +20,16 @@
                         Empty event  let's create new event :v
                     @else
                         @foreach ($data as $item)
+                       
                             <div class="card">
-                                <div card="body">
-
+                                <div class="body">
+                                  <div style="float: right">                                     
+                                    <h5>  </h5>
+                                  </div>
+                                   <h3 style="">{{$item->name}} </h3>
+                                  <p >{{$item->deskripsi}}</p>
                                 </div>
-                            </div>
+                            </div><br>
                         @endforeach
                     @endif
                 </div>
@@ -44,34 +46,35 @@
                     </div>
                     <div class="modal-body">
                         <form action="{{url('/event/add')}}" method="POST">
+                          @csrf
                             <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">neme Event</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                            <label for="exampleFormControlInput1" class="form-label">Nama Event</label>
+                            <input type="text" class="form-control" name="name" id="exampleFormControlInput1" >
                           </div>
                           <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">lokasi Event</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                            <label for="exampleFormControlInput1" class="form-label">Lokasi Event</label>
+                            <input type="text" class="form-control" name="lokasi" id="exampleFormControlInput1" >
                           </div>
-                          <div class="md-form mx-5 my-5">
-                            <input placeholder="Waktu acara dimulai" type="text" data-open="picker2" class="form-control date-time picker-opener">
-                            <input placeholder="Selected date" type="text" id="picker2"  class="form-control time-date-ghost">
-                            <input placeholder="Selected time" data-open="picker2" type="text" class="form-control timepicker time-date-ghost">
-                          </div>
-                          
-                          <div class="md-form mx-5 my-5">
-                            <input placeholder="waktu acara berakhir" type="text" data-open="picker3" class="form-control date-time-2 picker-opener">
-                            <input placeholder="Selected date" type="text" id="picker3"  class="form-control time-date-ghost">
-                            <input placeholder="Selected time" data-open="picker3" type="text" class="form-control timepicker time-date-ghost">
-                          </div>
+                          <div class='mb-3'>
+                              <label >Date and Time</label>
+                              <div class="row">
+                                <div class="col">
+                                  <input type="date"  name="date" class="form-control" class="form-control" />
+                                </div>
+                                <div class="col">
+                                  <input type="time" name="time" timeformat="24h" class="form-control" class="form-control" />
+                                </div>
+                              </div>
+                           
                           <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <label for="exampleFormControlTextarea1" class="form-label">Ketegarangan Tambahan </label>
+                            <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"></textarea>
                           </div>
-                        </form>
                         </div> 
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Understood</button>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">save</button>
+                        </form>
                     </div>
                   </div>
                 </div>

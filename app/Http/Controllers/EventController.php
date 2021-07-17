@@ -15,13 +15,17 @@ class EventController extends Controller
     }
 
     public function index(){
-    //     $data=$this->Query->getWhere('tb_acara'
-    //     ,'id_group',session('group')['id_group']);
-    //    dd($data->isEmpty());
         return view('event',['data'=>$this->Query->getWhere('tb_acara'
         ,'id_group',session('group')['id_group'])]);
     }
 
+    public function addEvent(Request $request){
+        $request['waktu_awal'] = $request->date." ".$request->time;
+        $request['waktu_akhir'] = $request->date." ".$request->time;
+        $request['id_group']=session('group')['id_group'];
+        $this->Query->insertData('tb_acara',$request->except(['_token','date','time']));
+        return redirect('/event');
+    }
     public function updateEvent(){
 
     }

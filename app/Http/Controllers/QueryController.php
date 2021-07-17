@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 class QueryController extends Controller
 {  
     public function checkData($arr){
-      //  $getid=DB::table($arr[0])->where($arr[1],$arr[2])->first();
       $getid=$this->getFrist($arr[0],$arr[1],$arr[2]);
        if ($arr[3]==1) {
          return $getid;
@@ -19,10 +18,8 @@ class QueryController extends Controller
        }
     }
     
-    
     public function insertData($table,$data){
      return  DB::table($table)->insertGetId($data);
-      
     }
     public function updateData($table,$column,$param,$data){
       DB::table($table)->where($column,$param)->update($data);
@@ -30,13 +27,29 @@ class QueryController extends Controller
     public function getFrist($table,$column,$param){
       return DB::table($table)->where($column,$param)->first();
     }
-    public function deleteData($table,$param){
-      DB::table($table)->where('id',$param)->delete();
+    public function deleteData($table,$column,$param){
+      DB::table($table)->where($column,$param)->delete();
     }
     public function getWhere($table,$column,$param){
       return DB::table($table)->where($column,$param)->get();
     }
     public function getfristtoarray($table,$column,$param){
       return DB::table($table)->where($column,$param)->get()->toArray();
+    }
+    public function joinWaitinglist(){
+      return  DB::table('tb_waitinglist')
+      ->where('tb_waitinglist.id_group',session('group')['id_group'])
+      ->join('users', 'tb_waitinglist.id_user', '=', 'users.id')
+      ->select('tb_waitinglist.*', 'users.name')
+      ->get();
+    }
+    public function joinanggota(){
+      return DB::table('tb_anggota')
+      ->where('tb_anggota.id_group',session('group')['id_group'])
+      ->join('users', 'tb_anggota.id_user', '=', 'users.id')
+      ->select('tb_anggota.*', 'users.name')
+      ->get();
     } 
+
+    
 }

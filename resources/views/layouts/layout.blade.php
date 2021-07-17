@@ -13,7 +13,17 @@
  
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
+        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
+        {{-- <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script> --}}
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script> --}}
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"> --}}
         <!-- Core theme CSS (includes Bootstrap)-->
+        {{-- <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script> --}}
+        {{-- <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/> --}}
+
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('css/style.css')}}" rel="stylesheet"
         <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet"> 
@@ -37,9 +47,7 @@
                               <li class="nav-item">
                                 <a class="nav-link" href="{{url('/keuangan')}}" style="color: #fff">Keuangan</a>
                               </li>  
-                              <li class="nav-item">
-                                <a class="nav-link" href="{{url('/agenda')}}" style="color: #fff">Agenda</a>
-                              </li>
+                              
                               <li class="nav-item">
                                 <a class="nav-link" href="{{url('/task')}}" style="color: #fff">Task</a>
                               </li>
@@ -77,6 +85,28 @@
                                         <a class="dropdown-item" style="background-color:#DBF1FF" href="#!">{{$jabatan}}</a>
                                         <a class="dropdown-item" href="#!">Another action</a>
                                         <div class="dropdown-divider"></div>
+                                          {{-- ++++++++++++form cherck +++++++++++++++ --}}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                              Default radio
+                                            </label>
+                                          </div>
+                                          @php
+                                              $arr=session('group_all');
+                                          @endphp
+                                          @foreach ($arr as $item)
+                                          
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="{{$item['id_group']}}" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                              {{$item['name']}}
+                                            </label>
+                                          </div>
+                                          @endforeach
+                                          {{-- ++++++++++++form cherck +++++++++++++++ --}}
+                                          
+                                          <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -105,42 +135,8 @@
         <!-- Core theme JS-->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="{{asset('js/scripts.js')}}" ></script>
-        <script>
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-            </script>
+        
+          @yield('script')
+            
     </body>
 </html>

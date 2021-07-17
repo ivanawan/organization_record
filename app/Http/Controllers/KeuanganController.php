@@ -16,4 +16,16 @@ class KeuanganController extends Controller
     public function index(){
         return view('keuangan');
     }
+    public function add(Request $request){
+        $data=$this->Query->getFrist('tb_keuangan','id_group',session('group')['id_group']);
+        if($data != null ){
+           $request['total']=$data->total + $request->jumlah;
+        }else{
+           $request['total']=$request->jumlah;
+        }
+        $request['id_group']=session('group')['id_group'];
+        // dd($request->all());
+        $this->Query->insertData('tb_keuangan',$request->except('_token'));
+        return back();
+    }
 }
