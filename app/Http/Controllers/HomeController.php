@@ -27,14 +27,17 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   if( session('group') ? null : $this->homeSet());
-        return view('home');
+    {   
+        // if( session('group') ? null : $this->homeSet());
+        // dd(session('group'));
+        return view('home',['event'=>$this->Query->getWhere('tb_acara'
+        ,'id_group',session('group')['id_group'])]);
     }
    
-    public function homeSet(){
-        session(['group_all' =>  $this->logic->getallgroup()]);
-        session(['group'=>session('group_all')[0]]);
-    }
+    // public function homeSet(){
+    //     session(['group_all' =>  $this->logic->getallgroup()]);
+    //     session(['group'=>session('group_all')[0]]);
+    // }
 
     public function homechange($index){
      if(sizeof(session('group_all')>$index)){

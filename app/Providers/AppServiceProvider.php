@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Carbon; 
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +23,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::directive('uang', function ($expression) {
+            return "Rp. <?php echo number_format($expression, 0, ',', '.'); ?>";
+        });
+        Blade::directive('tanggal', function ($expression) {
+            $bulan = array (
+                1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+            );
+            $pecahkan = explode('-', $expression);
+            // $tgl=
+            return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+        });
     }
 }

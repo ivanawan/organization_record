@@ -37,7 +37,7 @@ Route::post('/home-{$page}',[App\Http\Controllers\newUserController::class, 'sel
 Route::post('/new_group',[App\Http\Controllers\newUserController::class, 'newGroup'])->name('newGroup');
 Route::post('/code_group',[App\Http\Controllers\newUserController::class,'codeGroup']);
 // rote utama 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('setsession');
 Route::get('/event',[App\Http\Controllers\EventController::class, 'index'])->middleware('setsession');
 Route::get('/keuangan',[App\Http\Controllers\KeuanganController::class, 'index'])->middleware('setsession');
 Route::get('/group',[App\Http\Controllers\GroupController::class, 'index'])->middleware('setsession');

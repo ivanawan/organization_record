@@ -13,18 +13,28 @@ class KeuanganController extends Controller
         $this->middleware('auth');
         $this->session = session()->get('group');
     }
-    public function index(){
-        return view('keuangan');
+    public function index(){  
+        return view('keuangan',
+        ['data'=>$data=$this->Query->getDataDsc('tb_keuangan','id_group',session('group')['id_group'])
+        ,'total'=>$data->get(0)]);
     }
+    //get dataa from request then 
     public function add(Request $request){
-        $data=$this->Query->getFrist('tb_keuangan','id_group',session('group')['id_group']);
-        if($data != null ){
-           $request['total']=$data->total + $request->jumlah;
+        $request['jumlah'] = preg_replace('/[^0-9.]+/', '', $request->jumlah);
+        $request['jumlah'] =str_replace(".", "", $request->jumlah);
+        
+        $data=$this->Query->getLast('tb_keuangan','id_group',session('group')['id_group']);
+        if($data == null ){
+             $data= 0;
         }else{
-           $request['total']=$request->jumlah;
+            $data=$data->total;
+        }
+        if($request->role == 1){
+            $request['total']=$data + $request->jumlah;
+        }else{
+            $request['total']=$data - $request->jumlah;
         }
         $request['id_group']=session('group')['id_group'];
-        // dd($request->all());
         $this->Query->insertData('tb_keuangan',$request->except('_token'));
         return back();
     }

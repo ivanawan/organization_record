@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class QueryController extends Controller
 {  
     public function checkData($arr){
@@ -27,6 +27,15 @@ class QueryController extends Controller
     public function getFrist($table,$column,$param){
       return DB::table($table)->where($column,$param)->first();
     }
+    public function getLast($table,$column,$param){
+      return DB::table($table)->where($column,$param)->latest()->first();
+    }
+    public function cekGroup($table,$id_group,$id){
+      return DB::table($table)->where('id_group',$id_group)->where('id_user',$id)->first();
+    }
+    public function getDataDsc($table,$column,$param){
+      return DB::table($table)->where($column,$param)->latest()->get();
+    } 
     public function deleteData($table,$column,$param){
       DB::table($table)->where($column,$param)->delete();
     }

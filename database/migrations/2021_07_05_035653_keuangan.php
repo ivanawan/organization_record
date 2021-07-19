@@ -18,7 +18,7 @@ class Keuangan extends Migration
             $table->integer('id_group');
             // $table->string('iden');
             $table->boolean('role');
-            $table->string('keterangan')->nullable();
+            $table->text('keterangan')->nullable();
             $table->integer('jumlah');
             $table->timestamps();
             });

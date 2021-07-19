@@ -29,8 +29,12 @@ class newUserController extends Controller
     public function codeGroup(Request $request){
         
         if($data=$this->Query->checkData(['tb_group','code',$request->input('id_group'),1])){
+          if($this->Query->cekGroup('tb_anggota',$data->id,Auth::id())==null){
             $this->Query->insertData('tb_waitinglist',['id_group'=>$data->id,'id_user'=> Auth::id()]);
               $msg=['scc'=>' successfull wait the admin add to group'];
+            }else{
+              $msg=['err'=>' your acount alrady register on this group'];
+            }
         }else{
              $msg=['err'=>'token not found'];
           return redirect('/new_group')->with($msg);

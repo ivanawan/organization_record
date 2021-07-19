@@ -10,30 +10,21 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
- 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-
-
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
-        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
-        {{-- <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script> --}}
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script> --}}
-        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"> --}}
-        <!-- Core theme CSS (includes Bootstrap)-->
-        {{-- <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script> --}}
-        {{-- <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/> --}}
-
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('css/style.css')}}" rel="stylesheet"
         <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet"> 
     </head>
     <body style="background-color: #ecf8fc">
-       
+      <div id="page-container">
                 <!-- Top navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color:#1EA5FC;font-family: 'Poppins', sans-serif;">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#" style="margin-right: 20% ; margin-left:5%;color:#fff">Navbar</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
                             <li class="nav-item">
                               <a class="nav-link active" aria-current="page" href="{{url('/home')}}" style="color: #fff">Home</a>
@@ -48,11 +39,11 @@
                                 <a class="nav-link" href="{{url('/keuangan')}}" style="color: #fff">Keuangan</a>
                               </li>  
                               
-                              <li class="nav-item">
+                              {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{url('/task')}}" style="color: #fff">Task</a>
-                              </li>
+                              </li> --}}
                           </ul>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        </div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <li class="nav-item dropdown">
@@ -64,41 +55,35 @@
                                        
                                         switch ($data['role']) {
                                             case '1':
-                                                $jabatan= "ketua";
+                                                $jabatan = "ketua";
                                                 break;
                                                 case '2':
-                                                $jabatan="wakil ketua";
+                                                $jabatan ="wakil ketua";
                                                 break;
                                                 case '3':
-                                                $jabatan= "bendahara";
+                                                $jabatan = "bendahara";
                                                 break;
                                                 case '4':
-                                                $jabatan= "sekertaris";
+                                                $jabatan = "sekertaris";
                                                 break;
-                                                case '1':
-                                                $jabatan= "anggota";
+                                                case '5':
+                                                $jabatan = "anggota";
                                                 break;
                                             
                                         }
 
                                         @endphp
-                                        <a class="dropdown-item" style="background-color:#DBF1FF" href="#!">{{$jabatan}}</a>
-                                        <a class="dropdown-item" href="#!">Another action</a>
+                                        <a class="dropdown-item" style="background-color:#DBF1FF" href="#!">{{$jabatan ?? ''}}</a>
                                         <div class="dropdown-divider"></div>
                                           {{-- ++++++++++++form cherck +++++++++++++++ --}}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                              Default radio
-                                            </label>
-                                          </div>
+                                        
                                           @php
                                               $arr=session('group_all');
                                           @endphp
                                           @foreach ($arr as $item)
                                           
                                           <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="{{$item['id_group']}}" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                            <input class="form-check-input" type="radio" value="{{$item['id_group']}}" name="flexRadioDefault" id="flexRadioDefault2" @if($item['id_group']==session('group')['id_group']) checked @endif>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                               {{$item['name']}}
                                             </label>
@@ -125,11 +110,43 @@
                     </div>
                 </nav>
                 <!-- Page content-->
-                <div class="container" style="padding-top:25px">
+                <div  id="content-wrap" class="container" style="padding-top:25px">
+                  @if($msg=Session::get('prm'))
+                  <div class="alert alert-primary" role="alert">
+                    {{$msg}}
+                  </div>
+                 @endif 
+                 @if($msg=Session::get('scd'))
+                  <div class="alert alert-secondary" role="alert">
+                    A simple secondary alert—check it out!
+                  </div>
+                  @endif 
+                  @if($msg=Session::get('scc'))
+                  <div class="alert alert-success" role="alert">
+                    A simple success alert—check it out!
+                  </div>
+                  @endif 
+                  @if($msg=Session::get('err'))
+                  <div class="alert alert-danger" role="alert">
+                    A simple danger alert—check it out!
+                  </div>
+                  @endif 
+                  @if($msg=Session::get('wrn'))
+                  <div class="alert alert-warning" role="alert">
+                    A simple warning alert—check it out!
+                  </div>
+                  @endif 
+                  @if($msg=Session::get('info'))
+                  <div class="alert alert-info" role="alert">
+                    A simple info alert—check it out!
+                  </div>
+                  @endif
                   @yield('content')
 
                 </div>
-            
+                <br>
+                <div id="footer" class="text-center"> <p>Develop by <a href="http://ivanawan.github.io">ivan setiawan</a></p> </div>
+                </div>
         <!-- Bootstrap core JS-->
         <script src="{{asset('js/bootstrap.bundle.min.js')}}" ></script>
         <!-- Core theme JS-->
