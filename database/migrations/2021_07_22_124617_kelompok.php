@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PesertaAcara extends Migration
+class Kelompok extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class PesertaAcara extends Migration
      */
     public function up()
     {
-        Schema::create('tb_peserta', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_kelompok');
-            $table->string('name');
-            });
+        Schema::create('kelompok', function (Blueprint $table) {
+            $table->string('id')->primary();
+            // $table->foreignId('user_id')->nullable()->index();
+        });
     }
 
     /**
@@ -27,6 +26,6 @@ class PesertaAcara extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_peserta');
+        //
     }
 }

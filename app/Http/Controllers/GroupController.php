@@ -15,6 +15,9 @@ class GroupController extends Controller
     }
 
     public function index(){
+        if(session('code')==null){
+            session(['code'=>$this->Query->getFrist('tb_group','id',session('group')['id_group'])->code]);
+        }
        return view('group',['data'=>$this->Query->joinWaitinglist(),
        'anggota'=>$this->Query->joinanggota()]);
     }
@@ -33,8 +36,20 @@ class GroupController extends Controller
         $this->Query->deleteData('tb_waitinglist','id_user',$id);
         return redirect('/group');
     }
-    public function changerole(Request $request){
-        $this->Query->updateData('tb_anggota','id_user',$request->id,['role'=>$request->role]);
+    public function changerole(Request $request,$id){
+        $this->Query->changerole($request,$id);
         return redirect('/group');
     }
+    public function tambahAnggota(Request $request){
+        $id= $this->Query->insertData('users',$request->only(['name','email','password']));
+         $this->Query->insertData('tb_anggota',['id_group'=>session('group')['id_group']
+         ,'id_user'=>$id,'role'=>$request->role]);
+         return redirect('/group');
+
+     }
+
+     public function tambahpeserta(Request $request){
+         $this->Logic->addpeserta($request->except('_token'));
+    //   dd($request->all(),sizeof($request->all()));
+     }
 }

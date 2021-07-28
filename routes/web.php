@@ -22,6 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/group/addpeserta',function(){
+    return view('addpeserta');
+});
 Route::get('/new_group',function (){
     return view('newuser.new_group');
 });
@@ -37,7 +40,7 @@ Route::post('/home-{$page}',[App\Http\Controllers\newUserController::class, 'sel
 Route::post('/new_group',[App\Http\Controllers\newUserController::class, 'newGroup'])->name('newGroup');
 Route::post('/code_group',[App\Http\Controllers\newUserController::class,'codeGroup']);
 // rote utama 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('setsession');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['user_new','setsession']);
 Route::get('/event',[App\Http\Controllers\EventController::class, 'index'])->middleware('setsession');
 Route::get('/keuangan',[App\Http\Controllers\KeuanganController::class, 'index'])->middleware('setsession');
 Route::get('/group',[App\Http\Controllers\GroupController::class, 'index'])->middleware('setsession');
@@ -48,5 +51,8 @@ Route::post('/event/add',[App\Http\Controllers\EventController::class, 'addEvent
 // group
 Route::get('/group/delte/{id}',[App\Http\Controllers\GroupController::class, 'deletefromwaitinglist']);
 Route::get('/group/addtogroup/{id}',[App\Http\Controllers\GroupController::class, 'addtogroup']);
+Route::post('/group/changerole/{id}',[App\Http\Controllers\GroupController::class, 'changerole']);
+Route::post('/group/add/anggota',[App\Http\Controllers\GroupController::class, 'tambahAnggota']);
+Route::post('/group/addpeserta',[App\Http\Controllers\GroupController::class, 'tambahpeserta']);
 // event
 Route::post('/keuangan/add',[App\Http\Controllers\KeuanganController::class, 'add']);

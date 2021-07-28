@@ -18,6 +18,12 @@ class QueryController extends Controller
        }
     }
     
+    public function changerole($request,$id){
+      DB::table('tb_anggota')
+      ->where('id_group',session('group')['id_group'])
+      ->where('id_user',$id)
+      ->update(['role'=>$request->role]);
+    }
     public function insertData($table,$data){
      return  DB::table($table)->insertGetId($data);
     }

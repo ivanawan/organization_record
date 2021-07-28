@@ -26,4 +26,15 @@ class logicController extends Controller
             }
         return $arr;
     }
+
+    function addpeserta($arr){
+        $Query = new QueryController;
+        $id=$Query->insertData('tb_kelompok',['id_group'=>session('group')['id_group'],"name_k"=>$arr['name']]);
+        for($i=1;$i<=sizeof($arr)-1;$i++){
+            $name="peserta".$i;
+            $Query->insertData('tb_peserta',["name"=>$arr[$name],"id_kelompok"=> $id]);
+        }
+        return redirect('/group');
+    }
+      
 }
