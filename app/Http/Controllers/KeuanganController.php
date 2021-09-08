@@ -15,7 +15,7 @@ class KeuanganController extends Controller
     }
     public function index(){  
         return view('keuangan',
-        ['data'=>$data=$this->Query->getDataDsc('tb_keuangan','id_group',session('group')['id_group'])
+        ['data'=>$data=$this->Query->pagition('tb_keuangan','id_group',session('group')['id_group'])
         ,'total'=>$data->get(0)]);
     }
     //get dataa from request then 

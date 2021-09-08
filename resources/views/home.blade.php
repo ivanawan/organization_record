@@ -2,40 +2,75 @@
 
 
 @section('content')
-
-            <div class="container">
-                <div class="card">
-                    <div class="card-body">
-                <canvas id="myChart" width="100%" height="50vh"></canvas>
-                </div>
-                </div>
+<div class="container">
+    <button type="button" style="float:right; color:#fff" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#eventmodal">
+        <i class="bi bi-sliders"></i>
+   </button>
+  {{-- grafik panel    --}}
+  <br>
+  <br>
+ @if (isset($keuangan))    
+ <div class="container">
+     <label>keuangan bulan</label>
+    <div class="row row-cols-3">
+      <div class="col">
+        <div class="card">
+            <div class="card-body">
+              Pengeluaran: @uang($keuangan[0])
             </div>
-
-            <br>
-            {{-- buat event --}}
-            <div class="card">
-                <div class="card-body">
-                    <h4 style="color:rgb(140, 214, 171)">#Event</h4>
-                    <div class="row row-cols-2">
-                        @foreach ($event as $item)
-                        <div class="col">
-                            <div class="card ">
-                             <div class="card-body">
-                                 <h5 class="card-title">{{$item->name}}</h5>
-                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                 <a href="#" class="btn btn-primary">Button</a>
-                                </div>
-                            </div>
-                        </div>
-                            @endforeach
-                    </div>
-
-                </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+            <div class="card-body">
+               Pemasukan: @uang($keuangan[1])
             </div>
-       {{-- event end --}}
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+            <div class="card-body">
+             Total: @uang($keuangan[2])
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+@endif   
+{{-- grafik panel    --}}
+{{-- new  event --}}
+@if (isset($event))    
+<div class="card">
+    <div class="card-body">
+        
+    </div>
+</div>
+@endif
+{{-- end new  event --}}
+{{-- note group--}}
+@if (isset($note))    
+<div class="card">
+    <div class="card-body">
+        
+    </div>
+</div>
+@endif
 
-
-           
+@if (isset($hh))    
+<div class="card">
+    <div class="card-body">
+        
+    </div>
+</div>
+@endif
+@if (isset($not))    
+<div class="card">
+    <div class="card-body">
+        
+    </div>
+</div>
+@endif
+</div>
 @endsection
 @section('script')
 <script>

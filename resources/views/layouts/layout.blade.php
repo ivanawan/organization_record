@@ -39,9 +39,9 @@
                                 <a class="nav-link" href="{{url('/keuangan')}}" style="color: #fff">Keuangan</a>
                               </li>  
                               
-                              {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{url('/task')}}" style="color: #fff">Task</a>
-                              </li> --}}
+                              <li class="nav-item">
+                                <a class="nav-link" href="{{url('/page')}}" style="color: #fff">Public page</a>
+                              </li>
                           </ul>
                         </div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">

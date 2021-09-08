@@ -7,7 +7,7 @@
         <!-- <div class="col-md-8"> -->
             <div class="card">
                 <div class="card-header">
-                 keuangan
+                 <h3 style="float: left">keuangan<h3>
                  <div style="float:right">
                   <div class="input-group mb-3">
                     @php
@@ -15,7 +15,7 @@
                           $total=0;
                         }else{ $total = $total->total;}
                         @endphp
-                    <input type="text" class="form-control" value="Rp. {{$total}} " aria-label="Example text with button addon" aria-describedby="button-addon1" disabled readonly>
+                    <input type="text" class="form-control" value="@uang($total)" aria-label="Example text with button addon" aria-describedby="button-addon1" disabled readonly>
                     <button class="btn" style="background-color: #FECB4D" type="button" id="button-addon1" data-bs-toggle="modal" data-bs-target="#eventmodal">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -31,7 +31,7 @@
                       @if ($item->role==1)
                                                               
                   {{-- alert-p --}}
-                  <a type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{$item->keterangan}}">
+                  <a type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" date="{{'dibuat pada '.Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y')}}" data-bs-whatever="{{$item->keterangan}}">
                     <div class="alert alert-primary" role="alert">
                       <p style="float: right;"> +@uang($item->jumlah)</p>
                       {{$item->name}}
@@ -39,7 +39,7 @@
                   </a> 
                   @else
                   {{-- alert-p --}}
-                  <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{$item->keterangan}}">
+                  <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" date="{{'dibuat pada '.Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y')}}" data-bs-whatever="{{$item->keterangan}}">
                     <div class="alert alert-danger" role="alert">
                       <p style="float: right; "> -@uang($item->jumlah)</p>
                       {{$item->name}} 
@@ -50,6 +50,7 @@
                 </div>
             </div>
             <br>
+            {{ $data->links('vendor.pagination.custom') }}
             
               {{-----------------------------------------modal  1--------------------------------}}
               <div class="modal fade" id="eventmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -71,8 +72,8 @@
                             <input type="text"  class="form-control" name="jumlah" id="rupiah" >
                           </div>
                           <select class="form-select" name="role" aria-label="Default select example">
-                            <option value="1" selected>Masuk</option>
-                            <option value="0">Keluar</option>
+                            <option value="1" selected>Pemasukan</option>
+                            <option value="0">Pengeluaran</option>
                           
                           </select>
                           <div class="mb-3">
@@ -95,10 +96,11 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                      <a style="float: right;color:gray;font-size:13px" id="h"></a><br>
                       <p id="p" style="white-space: pre-wrap"></p>
                       
                     </div>
@@ -118,14 +120,16 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
   var button = event.relatedTarget
   // Extract info from data-bs-* attributes
   var recipient = button.getAttribute('data-bs-whatever')
+  var  data = button.getAttribute('date')
   // If necessary, you could initiate an AJAX request here
   // and then do the updating in a callback.
   //
   // Update the modal's content.
-  // var modalTitle = exampleModal.querySelector('.modal-title')
+  var date = exampleModal.querySelector('.modal-body a')
   // var modalBodyInput = exampleModal.querySelector('.modal-body input')
   var text = exampleModal.querySelector('.modal-body p');
   // modalTitle.textContent = 'New message to ' + recipient
+  date.textContent= data
   text.textContent = recipient 
   // modalBodyInput.value = recipient
 })

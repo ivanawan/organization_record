@@ -28,16 +28,14 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        // if( session('group') ? null : $this->homeSet());
-        // dd(session('group'));
-        return view('home',['event'=>$this->Query->getWhere('tb_acara'
-        ,'id_group',session('group')['id_group'])]);
+        // dd(session(group));
+        dd($this->Query->whereLimit('tb_acara','id_group',session('group')['id_group']));
+        return view('home',[
+            'keuangan'=>$this->logic->getPengeluaranDanPemasukan(),
+            'event' =>$this->Query->whereLimit('tb_acara','id_kelompok',session('group')['id_kelompok'])
+        ]);
     }
    
-    // public function homeSet(){
-    //     session(['group_all' =>  $this->logic->getallgroup()]);
-    //     session(['group'=>session('group_all')[0]]);
-    // }
 
     public function homechange($index){
      if(sizeof(session('group_all')>$index)){

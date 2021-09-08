@@ -19,77 +19,49 @@
                  
                  <div class="card">
                   <div class="card-body">
-                    <p style="float: right; " > 
-                      <i class="bi bi-calendar-week"></i>
-                      {{ Carbon\Carbon::parse($item->waktu_awal)->isoFormat('dddd, D MMMM Y') }}
-                    </p>
-                    <h5 class="card-title">{{$item->name}}</h5>
+                    <div class="btn-group" style="float: right">
+                    <a  type="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item"  href="{{url('/absen/'.$item->id)}}">Absen </a></li>
+                      <li>
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                        data-bs-namaEvent="{{$item->name}}" data-bs-id="{{$item->id}}" data-bs-tanggal="{{$item->tanggal}}" 
+                        data-bs-waktu="{{$item->waktu}}" data-bs-lokasi="{{$item->lokasi}}" data-bs-keterangan="{{$item->deskripsi}}" href="">Edit</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{{url('/event/delete/'.$item->id)}}">Delete</a></li>
+                    </ul>
+                    </div>
+                    <h5 class="card-title ">{{$item->name}}</h5><br>
                     <div class="container">
+                      <p class="card-text">
+                        <i class="bi bi-calendar-week"></i>
+                        {{Carbon\Carbon::parse($item->tanggal)->isoFormat('dddd, D MMMM Y')}}
+                      </p>  
                     <p class="card-text" style="color: #1EA5FC;float:left;margin-right:18px" ><i class="bi bi-geo-alt"></i> {{$item->lokasi}}</p>
-                    <p class="card-text"> <i class="bi bi-clock"></i> 8.00-20.00</p>
+                    @if ($item->waktu != null)
+                    <p class="card-text"> <i class="bi bi-clock"></i> {{$item->waktu}}</p>
+                    @endif
                     </div>
                     <div class="container" style="float: left">
                       <p class="card-text">
                         {{$item->deskripsi}}
                       </p>
-                     </div>
-                      {{-- <button class="btn btn-primary">absen</button> --}}
-                      <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="flush-heading{{$item->id}}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$item->id}}" aria-expanded="false" aria-controls="flush-collapse{{$item->id}}">
-                              <a class="btn btn-primary">Absen</a>
-                            </button>
-                          </h2>
-                          <div id="flush-collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$item->id}}" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                            pilih peserta group 
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="absen" value="1" id="flexCheckDefault">
-                              <label class="form-check-label" for="flexCheckDefault">
-                                group 1
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="absen" value="2" id="flexCheckDefault">
-                              <label class="form-check-label" for="flexCheckDefault">
-                                group 2
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="absen" value="3" id="flexCheckDefault">
-                              <label class="form-check-label" for="flexCheckDefault">
-                                group 3
-                              </label>
-                            </div>
-                            </div>
-                          </div>
-                        </div>
-                        {{-- <div class="accordion-item">
-                          <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                              Accordion Item #2
-                            </button>
-                          </h2>
-                          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                          </div>
-                        </div> --}}
-                        {{-- <div class="accordion-item">
-                          <h2 class="accordion-header" id="flush-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                              Accordion Item #3
-                            </button>
-                          </h2>
-                          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                          </div>
-                        </div> --}}
-                      </div>
-                   
+                     </div><br><br>
+                     <h8 style="float: right;color:gray" > 
+                      {{ Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y') }}
+                    </h8>
+                            {{-- <a href="{{url('/absen/'.$item->id)}}" style="margin-top: 30px" class="btn btn-primary"><i class="bi bi-clipboard-check"></i></a>
+                            <a  style="margin-top: 30px" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                              data-bs-namaEvent="{{$item->name}}" data-bs-id="{{$item->id}}" data-bs-tanggal="{{$item->tanggal}}" data-bs-waktu="{{$item->waktu}}" data-bs-lokasi="{{$item->lokasi}}" data-bs-keterangan="{{$item->deskripsi}}" >
+                              <i class="bi bi-clipboard-check"></i></a>
+                            <a href="{{url('/event/delete/'.$item->id)}}" style="margin-top: 30px" class="btn btn-danger"><i class="bi bi-clipboard-check"></i></a> --}}
                 </div>
-                </div><br>
-                @endforeach
+              </div><br>
+              @endforeach
+              {{ $data->links('vendor.pagination.custom') }}
 
 
 <!-- Modal -->
@@ -105,32 +77,23 @@
           @csrf
             <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Nama Event</label>
-            <input type="text" class="form-control" name="name" id="exampleFormControlInput1" >
+            <input type="text" class="form-control" name="name" id="exampleFormControlInput1" required>
           </div>
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Lokasi Event</label>
-            <input type="text" class="form-control" name="lokasi" id="exampleFormControlInput1" >
+            <input type="text" class="form-control" name="lokasi" id="exampleFormControlInput1" required>
           </div>
           <div class='mb-3'>
-              <label >Date and Time</label>
+              <label >tangal dan waktu</label>
               <div class="row">
                 <div class="col">
-                  <input type="date"  name="date" class="form-control" class="form-control" />
+                  <input type="date"  name="tanggal" class="form-control" class="form-control" required />
                 </div>
                 <div class="col">
-                  <input type="text" name="time" timeformat="24h" class="form-control" class="form-control" />
+                  <input type="text" name="waktu" timeformat="24h" class="form-control" class="form-control" required/>
                 </div>
               </div>
-              <label >Date and Time 2</label>
-              <div class="row">
-                <div class="col">
-                  <input type="date"  name="date" class="form-control" class="form-control" />
-                </div>
-                <div class="col">
-                  <input type="text" name="time" timeformat="24h" class="form-control" class="form-control" />
-                </div>
-              </div>
-           
+          <br>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Ketegarangan Tambahan </label>
             <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -145,4 +108,90 @@
     </div>
   </div>
 </div>
+{{-- modal 2 --}}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit event</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" id="form">
+          @csrf
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text" name="name" class="form-control" id="name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Lokasi:</label>
+            <input type="text" name="lokasi" class="form-control" id="lokasi">
+          </div>
+          {{-- //////////// --}}
+          <div class='mb-3'>
+            <label >tangal dan waktu</label>
+            <div class="row">
+              <div class="col">
+                <input type="date"  name="tanggal" class="form-control" id="date" class="form-control" required />
+              </div>
+              <div class="col">
+                <input type="text" name="waktu" timeformat="24h" class="form-control" id="time" class="form-control" required/>
+              </div>
+            </div>
+          </div>
+          {{-- //////////// --}}
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Deskripsi:</label>
+            <textarea class="form-control" name="deskripsi" id="message-text"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection 
+@section('script')
+<script>
+var exampleModal = document.getElementById('exampleModal')
+exampleModal.addEventListener('show.bs.modal', function (event) {
+  // Button that triggered the modal
+  var button = event.relatedTarget
+  // Extract info from data-bs-* attributes
+  var recipient = button.getAttribute('data-bs-namaEvent')
+  var recipient1 = button.getAttribute('data-bs-lokasi')
+  var recipient2 = button.getAttribute('data-bs-tanggal')
+  var recipient3 = button.getAttribute('data-bs-waktu')
+  var recipient4 = button.getAttribute('data-bs-id')
+  var recipient5 = button.getAttribute('data-bs-keterangan')
+
+
+  // var  data = button.getAttribute('date')
+  // If necessary, you could initiate an AJAX request here
+  // and then do the updating in a callback.
+  //
+  // Update the modal's content.
+  var form = exampleModal.querySelector('#form')
+  var name = exampleModal.querySelector('#name')
+  var tanggal=exampleModal.querySelector('#date')
+  var date = exampleModal.querySelector('#time')
+  var lokasi = exampleModal.querySelector('#lokasi')
+  var deskripsi = exampleModal.querySelector('.modal-body textarea');
+  
+  // modalTitle.textContent = 'New message to ' + recipient
+  
+  name.value= recipient
+  lokasi.value = recipient1
+  tanggal.value =recipient2
+  date.value= recipient3
+  form.setAttribute('action',"/event/edit/"+recipient4)
+  deskripsi.value = recipient5
+})
+
+
+</script>
+@endsection
