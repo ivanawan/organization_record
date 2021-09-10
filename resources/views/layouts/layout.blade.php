@@ -12,9 +12,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        {{-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> --}}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="{{ asset('css/style.css')}}" rel="stylesheet"
+        <link href="{{ asset('css/style.css')}}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet"> 
     </head>
     <body style="background-color: #ecf8fc">
@@ -38,10 +41,9 @@
                               <li class="nav-item">
                                 <a class="nav-link" href="{{url('/keuangan')}}" style="color: #fff">Keuangan</a>
                               </li>  
-                              
-                              <li class="nav-item">
+{{--                          <li class="nav-item">
                                 <a class="nav-link" href="{{url('/page')}}" style="color: #fff">Public page</a>
-                              </li>
+                              </li> --}}
                           </ul>
                         </div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">

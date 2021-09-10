@@ -34,7 +34,7 @@
                       <li><a class="dropdown-item" href="{{url('/event/delete/'.$item->id)}}">Delete</a></li>
                     </ul>
                     </div>
-                    <h5 class="card-title ">{{$item->name}}</h5><br>
+                    <h5 class="card-title ">{{Str::title($item->name) }}</h5><br>
                     <div class="container">
                       <p class="card-text">
                         <i class="bi bi-calendar-week"></i>
@@ -50,14 +50,10 @@
                         {{$item->deskripsi}}
                       </p>
                      </div><br><br>
-                     <h8 style="float: right;color:gray" > 
-                      {{ Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y') }}
+                     <h8 style="float: right;color:gray;font-size:10px" > 
+                      Dibuat {{ Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y') }}
                     </h8>
-                            {{-- <a href="{{url('/absen/'.$item->id)}}" style="margin-top: 30px" class="btn btn-primary"><i class="bi bi-clipboard-check"></i></a>
-                            <a  style="margin-top: 30px" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" 
-                              data-bs-namaEvent="{{$item->name}}" data-bs-id="{{$item->id}}" data-bs-tanggal="{{$item->tanggal}}" data-bs-waktu="{{$item->waktu}}" data-bs-lokasi="{{$item->lokasi}}" data-bs-keterangan="{{$item->deskripsi}}" >
-                              <i class="bi bi-clipboard-check"></i></a>
-                            <a href="{{url('/event/delete/'.$item->id)}}" style="margin-top: 30px" class="btn btn-danger"><i class="bi bi-clipboard-check"></i></a> --}}
+                           
                 </div>
               </div><br>
               @endforeach

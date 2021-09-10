@@ -21,6 +21,14 @@ class QueryController extends Controller
        }
     }
 
+    public function getAnggota(){
+      return  DB::table('tb_anggota')
+      ->where('id_group',session('group')['id_group'])
+      ->whereNotIn('role',[5])
+      ->join('users', 'tb_anggota.id_user', '=', 'users.id')
+      ->select('tb_anggota.*', 'users.name')
+      ->get();
+    }
     public function pagition($table,$column,$param,$limit=50,$pag=10){
       return  DB::table($table)->where($column,$param)->limit($limit)->orderBy('id','desc')->paginate($pag);
     }
@@ -28,7 +36,9 @@ class QueryController extends Controller
     public function getDataMontly($table,$column,$param,$month){
       return DB::table($table)->where($column,$param)->whereMonth('created_at',$month)->get();
     }
-
+    public function keuangan($table,$column,$param){
+      return DB::table($table)->where($column,$param)->whereMonth('created_at',date('m'))->get();
+    }
     public function changerole($request,$id){
       DB::table('tb_anggota')
       ->where('id_group',session('group')['id_group'])
@@ -51,6 +61,13 @@ class QueryController extends Controller
     public function getLast($table,$column,$param){
       return DB::table($table)->where($column,$param)->latest()->first();
     }
+    public function GetEvent($table,$column,$param){
+    date_default_timezone_set("Asia/Jakarta");
+    return DB::table($table)->where($column,$param)->whereMonth('tanggal',date('m'))->limit(5)->get();
+    }
+    public function getLastMont($table,$column,$param,$month){
+      return DB::table($table)->where($column,$param)->whereMonth('created_at',$month)->latest()->first();
+    }
     public function getPaginition(){
       return DB::table($table)->where($column,$param)->orderBy('id','desc')->paginate(15)->get();
     }
@@ -71,6 +88,9 @@ class QueryController extends Controller
     }
     public function getOrder($table,$column,$param){
       return DB::table($table)->where($column,$param)->orderBy('id','desc')->get();
+    }
+    public function getOrderLimit($table,$column,$param){
+      return DB::table($table)->where($column,$param)->orderBy('id','desc')->limit(5)->get();
     }
     public function whereLimit($table,$column,$param,$limit=5){
       return DB::table($table)->where($column,$param)->latest()->limit($limit)->get();

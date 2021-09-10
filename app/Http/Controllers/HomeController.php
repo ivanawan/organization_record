@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use  App\Http\Controllers\QueryController; 
 use  App\Http\Controllers\logicController;
-
 class HomeController extends Controller
 {
     /**
@@ -28,11 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        // dd(session(group));
-        dd($this->Query->whereLimit('tb_acara','id_group',session('group')['id_group']));
+        date_default_timezone_set("Asia/Jakarta");
+
         return view('home',[
-            'keuangan'=>$this->logic->getPengeluaranDanPemasukan(),
-            'event' =>$this->Query->whereLimit('tb_acara','id_kelompok',session('group')['id_kelompok'])
+            'group'=>$this->Query->getFrist('tb_group','id',session('group')['id_group']),
+            'anggota'=>$this->Query->getAnggota(),
+            'keuangan'=>$this->logic->getPengeluaranDanPemasukan(date('m')),
+            'event' =>$this->Query->GetEvent('tb_acara','id_group',session('group')['id_group']),
+            'grafik' =>$this->logic->getGrafik(),
+            'list'=>$this->Query->keuangan('tb_keuangan','id_group',session('group')['id_group']),
         ]);
     }
    

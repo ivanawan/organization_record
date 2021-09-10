@@ -44,7 +44,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/event',[App\Http\Controllers\EventController::class, 'index'])->middleware('setsession');
 Route::get('/keuangan',[App\Http\Controllers\KeuanganController::class, 'index'])->middleware('setsession');
 Route::get('/group',[App\Http\Controllers\GroupController::class, 'index'])->middleware('setsession');
-Route::get('/page',[App\Http\Controllers\PublicPageController::class, 'index'])->middleware('setsession');
+// Route::get('/page',[App\Http\Controllers\PublicPageController::class, 'index'])->middleware('setsession');
 // route support add / edit / delete for main route
 // event
 Route::post('/event/add',[App\Http\Controllers\EventController::class, 'addEvent']);

@@ -34,7 +34,7 @@
                   <a type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" date="{{'dibuat pada '.Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y')}}" data-bs-whatever="{{$item->keterangan}}">
                     <div class="alert alert-primary" role="alert">
                       <p style="float: right;"> +@uang($item->jumlah)</p>
-                      {{$item->name}}
+                      {{Str::title($item->name)}}
                     </div>
                   </a> 
                   @else
@@ -42,7 +42,7 @@
                   <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" date="{{'dibuat pada '.Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y')}}" data-bs-whatever="{{$item->keterangan}}">
                     <div class="alert alert-danger" role="alert">
                       <p style="float: right; "> -@uang($item->jumlah)</p>
-                      {{$item->name}} 
+                      {{Str::title($item->name)}}
                     </div>
                   </a>
                   @endif

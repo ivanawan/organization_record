@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use  App\Http\Controllers\QueryController; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 // $Query = new QueryController;
 
 class logicController extends Controller
@@ -129,12 +129,16 @@ class logicController extends Controller
 
     }
 
-    function getPengeluaranDanPemasukan(){
+    function getPengeluaranDanPemasukan($date){
         $Query = new QueryController;
-        date_default_timezone_set("Asia/Jakarta");
-        $data=$Query->getDataMontly('tb_keuangan','id_group',session('group')['id_group'],date('m'));
+        $data=$Query->getDataMontly('tb_keuangan','id_group',session('group')['id_group'],$date);
         $arr= $this->sortirPengeluaranPemasukan($data);
-        $arr[]=$Query->getLast('tb_keuangan','id_group',session('group')['id_group'])->total;
+        $keuangan=$Query->getLastMont('tb_keuangan','id_group',session('group')['id_group'],$date);
+        if($keuangan !=  null){
+            $arr[]=$keuangan->total;
+        }else{
+            $arr[]=0;
+        }
         return $arr;
     }
     
@@ -149,6 +153,24 @@ class logicController extends Controller
             }
         }
      return[$pengeluaran,$pemasukan];
+   }
+
+   function getGrafik(){
+    date_default_timezone_set("Asia/Jakarta");
+    $date=date('m');
+    $month=["Januari","Febuari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+    $arr[]=[$month[$date-7],$month[$date-6],$month[$date-5],
+           $month[$date-5],$month[$date-3],$month[$date-2],
+           $month[$date-1]];
+    $arr[]=$this->getPengeluaranDanPemasukan($date-6);
+    $arr[]=$this->getPengeluaranDanPemasukan($date-5);
+    $arr[]=$this->getPengeluaranDanPemasukan($date-4);
+    $arr[]=$this->getPengeluaranDanPemasukan($date-3);
+    $arr[]=$this->getPengeluaranDanPemasukan($date-2);
+    $arr[]=$this->getPengeluaranDanPemasukan($date-1);
+    $arr[]=$this->getPengeluaranDanPemasukan($date);
+
+    return $arr;
    }
         
 
