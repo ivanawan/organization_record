@@ -14,7 +14,7 @@
                         @csrf
                       <div class="container">
                         <div class="mb-3">
-                            <label for="email" class="form-label">{{ __('E-Mail') }}</label>
+                            <label for="email" class="form-label">{{ __('E-Mail Andress') }}</label>
 
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 

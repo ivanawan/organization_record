@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Asset extends Migration
+class TbAgendaitems extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class Asset extends Migration
      */
     public function up()
     {
-        Schema::create('tb_asset', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('keterangan')->nullable();
-            $table->timestamps();
-            });
+        Schema::create('tb_agendaitems', function (Blueprint $table) {
+            $table->id()->primary();
+            $table->integer('id_agenda');
+            $table->string('step');
+            $table->text('desc');
+            $table->timestime();
+        });
     }
 
     /**
@@ -28,6 +29,6 @@ class Asset extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_asset');
+        schema::drop('tb_agendaitems');
     }
 }

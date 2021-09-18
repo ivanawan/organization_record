@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Setelan extends Migration
+class TbAgenda extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class Setelan extends Migration
      */
     public function up()
     {
-        // Schema::create('group', function (Blueprint $table) {
-        //     $table->string('id');
-        //     $table->string('name');
-        //     $table->timestamps();
-        //     });
+        Schema::create('tb_agenda', function (Blueprint $table) {
+            $table->id()->primary();
+            $table->integer('id_group');
+            $table->string('name');
+            $table->text('desc');
+            $table->timestime();
+        });
     }
 
     /**
@@ -27,6 +29,6 @@ class Setelan extends Migration
      */
     public function down()
     {
-        //
+        schema::drop('tb_agenda');
     }
 }

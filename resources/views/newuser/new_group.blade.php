@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 
 @section('content')
 <div class="col d-flex justify-content-center">
@@ -30,7 +30,7 @@
     <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3" required></textarea>
   </div>
   <a href="{{url('/code_group')}}" class="btn btn-primary">code group</a>
-  <button type="submit" class="btn btn-primary">Next -></button>
+  <button type="submit" class="btn btn-primary">Create</button>
 </form>
                 </div>
             </div>

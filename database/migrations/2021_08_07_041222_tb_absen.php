@@ -17,7 +17,7 @@ class TbAbsen extends Migration
             $table->id()->primary();
             $table->integer('user_id');
             $table->integer('event_id');
-            $table->timestime();
+            $table->timestamps();
         });
     }
 

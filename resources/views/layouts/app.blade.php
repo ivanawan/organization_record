@@ -16,6 +16,10 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" type="text/javascript">
+</script>
+
     <!-- Styles -->
    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -80,5 +84,12 @@
             @yield('content')
         </main>
     </div>
+    <!-- Bootstrap core JS-->
+    <script src="{{asset('js/bootstrap.bundle.min.js')}}" ></script>
+    <!-- Core theme JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <script src="{{asset('js/scripts.js')}}" ></script>
+    @yield('script')
+
     </body>
 </html>

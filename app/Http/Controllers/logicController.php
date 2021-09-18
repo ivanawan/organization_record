@@ -27,11 +27,12 @@ class logicController extends Controller
         $Query = new QueryController;
         $data=$Query->getWhere('tb_anggota','id_user',Auth::id());
         $arr=[];
-           for($x=0;$x<=sizeof($data)-1;$x++){
-            $group=$Query->getFrist('tb_group','id',$data[$x]->id_group);
-            $arr[$x]=['role'=>$data[$x]->role,'id_group'=>$data[$x]->id_group,'name'=>$group->name];
-
-            }
+        foreach($data as $i){
+            $group=$Query->getFrist('tb_group','id',$i->id_group);
+            $arr[]=[ 'role'=>$i->role,
+                     'id_group'=>$i->id_group,
+                     'name'=>$group->name];
+        }
         return $arr;
     }
 
@@ -172,6 +173,47 @@ class logicController extends Controller
 
     return $arr;
    }
-        
+   
+   function storeAgenda($data){
+    $Query = new QueryController;
+ 
+    $id=$Query->insertData('tb_agenda',[
+        'id_group'=>session('group')['id_group'],
+        'name'=>$data['name'],
+        'desc'=>$data['desc']    
+    ]);
+    $newdata=$this->formatdata($data,$id);
+    $Query->insert('tb_agendaitems',$newdata);
+    $Query->updatedata('tb_agenda','id',$id,['alltask'=>count($newdata),'finishtask'=>0]);
+
+   }
+
+   function formatdata($arr,$id=1){
+       unset($arr['name'],$arr['desc']);
+       
+       foreach($arr as $a => $x){
+           if(gettype($a)== "integer"){
+               if(isset($arr['descitem'.$a])) {
+                  $new[]=[
+                      'id_agenda'=>$id,
+                      'step'=>$x,
+                      'desc'=>$arr['descitem'.$a],
+                      'finish'=>0
+                    ];
+               }else{
+                   $new[]=[
+                  'id_agenda'=>$id,
+                  'step'=>$x,
+                  'desc'=>null,
+                  'finish'=>0
+                ];
+               }
+           }
+           
+       }
+       
+       return $new;
+
+   }
 
 }

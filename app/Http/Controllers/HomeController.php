@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\logicController;
+use App\Http\Controllers\QueryController;
 use Illuminate\Http\Request;
-use  App\Http\Controllers\QueryController; 
-use  App\Http\Controllers\logicController;
+
 class HomeController extends Controller
 {
     /**
@@ -13,39 +14,61 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(Request $request)
-    {   
+    {
         $this->Query = new QueryController;
-        $this->middleware('auth');
-        $this->middleware('user_new');
-        $this->logic= new logicController;
+        $this->logic = new logicController;
     }
 
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Array
      */
     public function index()
     {   
         date_default_timezone_set("Asia/Jakarta");
-
-        return view('home',[
-            'group'=>$this->Query->getFrist('tb_group','id',session('group')['id_group']),
-            'anggota'=>$this->Query->getAnggota(),
-            'keuangan'=>$this->logic->getPengeluaranDanPemasukan(date('m')),
-            'event' =>$this->Query->GetEvent('tb_acara','id_group',session('group')['id_group']),
-            'grafik' =>$this->logic->getGrafik(),
-            'list'=>$this->Query->keuangan('tb_keuangan','id_group',session('group')['id_group']),
+        return view('home', [
+            'group' => $this->Query->getFrist('tb_group', 'id', session('group')['id_group']),
+            'anggota' => $this->Query->getAnggota(),
+            'keuangan' => $this->logic->getPengeluaranDanPemasukan(date('m')),
+            'event' => $this->Query->GetEvent('tb_acara', 'id_group', session('group')['id_group']),
+            'grafik' => $this->logic->getGrafik(),
+            'list' => $this->Query->keuangan('tb_keuangan', 'id_group', session('group')['id_group']),
         ]);
     }
-   
 
-    public function homechange($index){
-     if(sizeof(session('group_all')>$index)){
-        session(['group'=>session('group_all')[$index]]);
-     }else{
-         return back();
-     }
+    public function homechange($index)
+    {
+        if (sizeof(session('group_all') > $index)) {
+            session(['group' => session('group_all')[$index]]);
+        } else {
+            return back();
+        }
     }
-    
+
+    public function publicPage(Request $request,$code){
+        $data=$this->Query->getFrist('tb_group','code',$code);
+        // set session
+        session(['group'=>[
+                           'id_group'=>$data->id,
+                           'name'=>$data->name
+                           ]]);
+       date_default_timezone_set("Asia/Jakarta");
+        $group=$this->Query->getFrist('tb_group', 'id', session('group')['id_group']);
+        $anggota= $this->Query->getAnggota();
+        $keuangan = $this->logic->getPengeluaranDanPemasukan(date('m'));
+        $event = $this->Query->GetEvent('tb_acara', 'id_group', session('group')['id_group']);
+        $grafik = $this->logic->getGrafik();
+        $list = $this->Query->keuangan('tb_keuangan', 'id_group', session('group')['id_group']);
+        $request->session()->forget('group');
+        return view('home', [
+            'group' => $group,
+            'anggota' => $anggota,
+            'keuangan' => $keuangan,
+            'event' => $event,
+            'grafik' => $grafik,
+            'list' => $list,
+        ]);
+    }
+
 }

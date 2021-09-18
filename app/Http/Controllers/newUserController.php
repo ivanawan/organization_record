@@ -12,7 +12,6 @@ class newUserController extends Controller
     { 
         $this->Query = new QueryController;
         $this->Logic = new logicController;
-        $this->middleware('auth');
         
     }
      

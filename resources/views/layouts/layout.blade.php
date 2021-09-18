@@ -29,29 +29,46 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                          @if (Auth::check())
                             <li class="nav-item">
                               <a class="nav-link active" aria-current="page" href="{{url('/home')}}" style="color: #fff">Home</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="{{url('/event')}}" style="color: #fff">Event</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{url('/group')}}" style="color: #fff">Group</a>
                               </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{{url('/event')}}" style="color: #fff">Event</a>
+                            </li>
                               <li class="nav-item">
                                 <a class="nav-link" href="{{url('/keuangan')}}" style="color: #fff">Keuangan</a>
-                              </li>  
-{{--                          <li class="nav-item">
-                                <a class="nav-link" href="{{url('/page')}}" style="color: #fff">Public page</a>
-                              </li> --}}
+                              </li> 
+                              <li class="nav-item">
+                                <a class="nav-link" href="{{url('/agenda')}}" style="color: #fff">Agenda</a>
+                              </li>   
+                             @endif 
                           </ul>
                         </div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item dropdown">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0" >
+                                 {{-- start --}}
+                                 @guest
+                                 @if (Route::has('login'))
+                                 <li class="nav-item" >
+                                     <a class="nav-link" style="color: #fff" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                 </li>
+                                 @endif
+ 
+                                 @if (Route::has('register'))
+                                 <li class="nav-item">
+                                     <a class="nav-link" style="color: #fff" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                 </li>
+                                 @endif
+                                 @else
+                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff"> {{ Auth::user()->name }}</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        @php
+                                      @if(session('group')!= null)
+                                      @php
                                         $data=session('group');
                                         $all=session('group_all');
                                        
@@ -78,35 +95,39 @@
                                         <a class="dropdown-item" style="background-color:#DBF1FF" href="#!">{{$jabatan ?? ''}}</a>
                                         <div class="dropdown-divider"></div>
                                           {{-- ++++++++++++form cherck +++++++++++++++ --}}
-                                        
-                                          @php
-                                              $arr=session('group_all');
-                                          @endphp
-                                          @foreach ($arr as $item)
+                                          <div class="container">
+                                          @foreach ($all as $item)
                                           
                                           <div class="form-check">
                                             <input class="form-check-input" type="radio" value="{{$item['id_group']}}" name="flexRadioDefault" id="flexRadioDefault2" @if($item['id_group']==session('group')['id_group']) checked @endif>
                                             <label class="form-check-label" for="flexRadioDefault2">
-                                              {{$item['name']}}
+                                              {{Str::limit($item['name'],10) }}
                                             </label>
                                           </div>
                                           @endforeach
+                                          </div>
                                           {{-- ++++++++++++form cherck +++++++++++++++ --}}
-                                          
                                           <div class="dropdown-divider"></div>
+                                          @endif
+                                          <a class="dropdown-item text-decoration-none" href="{{url('/user')}}">
+                                            <button class="btn"  style="background-color:#fc891e;width:100%;color:#fff" type="button">Setting</button>
+                                          </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        
+              
                                          <button class="btn " style="background-color:#1EA5FC;width:100%;color:#fff" type="button">{{ __('Logout') }}</button>
                                                                                  
+                                        </a> 
                                     </a>
+                                        </a> 
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                     </div>
-                                </li>
+                                </li>{{--  end  --}}
+                                @endguest
                             </ul>
                         </div>
                     </div>
@@ -120,35 +141,47 @@
                  @endif 
                  @if($msg=Session::get('scd'))
                   <div class="alert alert-secondary" role="alert">
-                    A simple secondary alert—check it out!
+                    {{$msg}}
                   </div>
                   @endif 
                   @if($msg=Session::get('scc'))
                   <div class="alert alert-success" role="alert">
-                    A simple success alert—check it out!
+                     {{$msg}}
                   </div>
                   @endif 
                   @if($msg=Session::get('err'))
                   <div class="alert alert-danger" role="alert">
-                    A simple danger alert—check it out!
+                    {{$msg}}
                   </div>
                   @endif 
                   @if($msg=Session::get('wrn'))
                   <div class="alert alert-warning" role="alert">
-                    A simple warning alert—check it out!
+                    {{$msg}}
                   </div>
                   @endif 
                   @if($msg=Session::get('info'))
                   <div class="alert alert-info" role="alert">
-                    A simple info alert—check it out!
+                    {{$msg}}
                   </div>
                   @endif
                   @yield('content')
 
                 </div>
+               </div>
                 <br>
-                <div id="footer" class="text-center"> <p>Develop by <a href="http://ivanawan.github.io">ivan setiawan</a></p> </div>
-                </div>
+                @php
+                $year=date('Y');    
+                @endphp
+                {{-- <div id="footer" >  --}}
+                  <footer style="background-color:#1EA5FC">
+                    {{-- <p style="align-content: center"> --}}
+                    &copy; Copyright {{$year}},
+                    Develop by <a href="http://ivanawan.github.io">ivan setiawan</a>
+                    source code at <a href="https://github.com/ivanawan/organization_record">https://github.com/ivanawan/organization_record</a>
+                  
+                  </footer>
+                {{-- </div> --}}
+                
         <!-- Bootstrap core JS-->
         <script src="{{asset('js/bootstrap.bundle.min.js')}}" ></script>
         <!-- Core theme JS-->
