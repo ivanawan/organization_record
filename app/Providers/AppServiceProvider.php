@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Illuminate\Support\Facades\URL::forceScheme('https');
+        // Illuminate\Support\Facades\URL::forceScheme('https');
         Blade::directive('uang', function ($expression) {
             return "Rp. <?php echo number_format($expression, 0, ',', '.'); ?>";
         });
