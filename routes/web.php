@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Routing\UrlGenerator;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
