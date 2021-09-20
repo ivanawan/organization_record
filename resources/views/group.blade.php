@@ -544,13 +544,15 @@
         <div class="card-header">
             Kelompok Peserta
         </div>
-        <div class="card-body" style="height: 80vh; overflow: auto;">
+        <div class="card-body" style="max-height: 80vh; overflow: auto;">
             @foreach ($peserta as $item)
+            <div class="alert alert-primary" role="alert">
+                <a href="{{ url('/peserta/delete/' . $item->id) }}">
+                <i style="float: right;color:red" class="bi bi-trash"></i></a>
                 <a href="{{ url('/peserta/' . $item->id) }}" style="text-decoration: none">
-                    <div class="alert alert-primary" role="alert">
                         {{ $item->name_k }}
+                    </a>
                     </div>
-                </a>
             @endforeach
 
         </div>

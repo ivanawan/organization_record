@@ -28,9 +28,9 @@
         </div>
         <div class="card-body">
             @if($data->isEmpty())
-            <div class="alert alert-dark" role="alert">
-                  <p>Not Have Data To Preview</p>
-            </div>
+            <div class="alert alert-primary" role="alert">
+                no have Data to Preview
+              </div>
             @endif
             @foreach ($data as $item)
                 @if ($item->role == 1)

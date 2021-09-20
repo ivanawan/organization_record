@@ -5,28 +5,54 @@
     <br>
     {{-- //bagian user --}}
             <div class="row">
-                <div class="col" style="background-color:#fff">
+                <div class="col-sm-12 col-md-12 col-lg-6" >
+                    <div class="card" style="margin-bottom:10px">
+                        <div class="card-body">
                     <h4 ># User</h4>
                     <div class="container">
-                    <form action="{{url('/user/edit')}}" method="POST">
-                     @method('PUT')   
+                    <form action="{{url('/user/edit')}}" onsubmit="myFunction(this)" method="POST">
+                     @csrf
+                     @method('PUT')
+                     <div class="mb-3">
+                         <label for="exampleFormControlInput1" class="form-label">Username</label>
+                         <input type="text" name="username" value="{{Auth::user()->name}}" class="form-control" id="exampleFormControlInput1">
+                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="exampleFormControlInput1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" id="exampleFormControlInput1">
+                        <input type="email" name="email" value="{{Auth::user()->email}}" class="form-control" id="exampleFormControlInput1">
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-warning">edit</button>
                     </div>
                     </form>
                     </div>
-                    
+                        </div>
+                    </div>
                 </div>
-                <div class="col" style="background: #fc891e">
-                  
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                    <form action="{{url('/user/edit/pass')}}" method="POST">
+                        @csrf   
+                       <div class="mb-3">
+                           <label for="exampleFormControlInput1" class="form-label">Password Lama</label>
+                           <input type="password" name="old_password" class="form-control" id="exampleFormControlInput1">
+                       </div>
+                       <div class="mb-3">
+                           <label for="exampleFormControlInput1" class="form-label">Password Baru</label>
+                           <input type="password" name="new_password" value="" class="form-control" id="exampleFormControlInput1">
+                       </div>
+                       <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Confirm Password Baru</label>
+                        <input type="password" name="confirim_pass" value="" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                       <div class="mb-3">
+                           <button type="submit" class="btn btn-warning">edit</button>
+                           
+                       </div>
+                       </form>
+                    </div>
+                </div>
                 </div>
             </div>
 {{-- //bagian group --}}

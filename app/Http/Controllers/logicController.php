@@ -46,20 +46,20 @@ class logicController extends Controller
         return redirect('/group');
     }
     
-    function getPeserta(){
-        $arr;
-        $Query = new QueryController;
-        $kelompok=$Query->getWhere('tb_kelompok','id_group',session('group')['id_group']);
+    // function getPeserta(){
+    //     $arr;
+    //     $Query = new QueryController;
+    //     $kelompok=$Query->getWhere('tb_kelompok','id_group',session('group')['id_group']);
         
-        for($i=0;$i <= sizeof($kelompok)-1;$i++){
-         $arr[]=[
-             "id"=>$kelompok[$i]->id,
-             "nama"=>$kelompok[$i]->name_k,
-             "peserta"=>$Query->getWhere('tb_peserta','id_kelompok',$kelompok[$i]->id)         
-            ];
-        }
-        dd($arr);
-    }
+    //     for($i=0;$i <= sizeof($kelompok)-1;$i++){
+    //      $arr[]=[
+    //          "id"=>$kelompok[$i]->id,
+    //          "nama"=>$kelompok[$i]->name_k,
+    //          "peserta"=>$Query->getWhere('tb_peserta','id_kelompok',$kelompok[$i]->id)         
+    //         ];
+    //     }
+    //     dd($arr);
+    // }
 
     function insertDataAbsen($arrayInput,$arrayChecked,$idHub){
         $Query = new QueryController;
@@ -184,11 +184,24 @@ class logicController extends Controller
     ]);
     $newdata=$this->formatdata($data,$id);
     $Query->insert('tb_agendaitems',$newdata);
-    $Query->updatedata('tb_agenda','id',$id,['alltask'=>count($newdata),'finishtask'=>0]);
+    $Query->updateData('tb_agenda','id',$id,['alltask'=>count($newdata),'finishtask'=>0]);
+
+   }
+ 
+   function editAgenda($arr,$id){
+   $Query = new QueryController;
+   $item_agenda=$Query->getWhere('tb_agendaitems','id_agenda',$id);
+   $new_data=$this->getNewData($arr,$item_agenda);
+   $insertData=$this->formatdata($new_data[0],$id);
+   $Query->insert('tb_agendaitems',$insertData);
+   $Query->updateData('tb_agenda','id',$id,[
+                                        'name'=>$arr['name'],
+                                        'desc'=>$arr['desc'],
+                                        'alltask'=>count($insertData)+$new_data[1]]);
 
    }
 
-   function formatdata($arr,$id=1){
+   function formatdata($arr,$id){
        unset($arr['name'],$arr['desc']);
        
        foreach($arr as $a => $x){
@@ -214,6 +227,65 @@ class logicController extends Controller
        
        return $new;
 
+   }
+
+   public function getNewData($arr,$item_agenda){
+   $Query = new QueryController;
+     $min=0;
+     $total=count($item_agenda);
+     foreach($item_agenda as $i){
+     $con1= $i->step != $arr['data'.$i->id];
+     $con2 = $i->desc != $arr['desc'.$i->id];
+        if($arr['data'.$i->id]== null){
+            $min++;
+            $Query->deleteData('tb_agendaitems','id',$i->id);
+        }elseif($con1 or $con2){
+         $Query->updateData('tb_agendaitems','id',$i->id,[
+             "step"=>$arr['data'.$i->id],
+             "desc"=>$arr['desc'.$i->id]]);
+        } 
+     unset($arr['data'.$i->id]);
+     unset( $arr['desc'.$i->id]);    
+    }  
+
+    return [$arr,$total-$min];
+   }
+
+   function checkList($arr,$id)
+   { 
+     $Query = new QueryController;
+     $check =$Query->getTwoCondition('tb_agendaitems',['id_agenda',$id,'finish','1']);
+     
+     if($check->isEmpty()){
+         $this->updateData($arr,$id);
+         $Query->updateData('tb_agenda','id',$id,['finishtask'=>count($arr)]);
+     }else{
+         $data=$this->sortirData($arr,$id,$check);
+         $this->updateData($data[0],$id);
+         $Query->updateData('tb_agenda','id',$id,['finishtask'=>$data[1]+count($data[0])]);
+     }
+   }
+
+   public function updateData($arr ,$id){
+   $Query = new QueryController;
+       
+       foreach($arr as $a=>$b){
+        $Query->updateData('tb_agendaitems','id',$a,['finish'=>$b])  ;       
+       }
+   }
+
+   public function sortirData($arr,$id,$data){
+    $Query = new QueryController;
+    $finis_data=0;
+        foreach($data as $d){
+            if(!isset($arr[$d->id])){
+                $Query->updateData('tb_agendaitems','id',$d->id,['finish'=>0])  ;
+            }else{
+                unset($arr[$d->id]);
+                $finis_data++;
+            }
+        }
+        return [$arr,$finis_data];
    }
 
 }

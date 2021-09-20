@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TbAgenda extends Migration
+class TbHub extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class TbAgenda extends Migration
      */
     public function up()
     {
-        Schema::create('tb_agenda', function (Blueprint $table) {
+        Schema::create('tb_hub', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_group');
-            $table->string('name');
-            $table->text('desc');
-            $table->integer('alltask')->nullable();
-            $table->integer('finistask')->nullable();
-            $table->timestamps();
+            $table->integer('id_kelompok');
+            $table->integer('id_acara');
+            
         });
     }
 
@@ -31,6 +28,6 @@ class TbAgenda extends Migration
      */
     public function down()
     {
-        schema::drop('tb_agenda');
+        Schema::drop('tb_hub');
     }
 }

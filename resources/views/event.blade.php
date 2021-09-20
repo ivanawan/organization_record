@@ -67,7 +67,9 @@
         @empty 
         <div class="card">
             <div class="card-body">
-                <p>no have Event to Preview </p>
+                <div class="alert alert-primary" role="alert">
+                    no have Data to Preview
+                  </div>
             </div>
         </div>
     @endforelse

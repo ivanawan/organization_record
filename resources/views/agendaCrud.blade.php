@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container" style="padding-left:20%;padding-right:20%">
-@if(isset($agendaEdit)){
+
+  
+@if(isset($agendaEdit))
     <form method="POST" action="{{ url('/agenda/edit/'.$agendaEdit->id) }}">
         @csrf
              {{-- titile and description --}}
@@ -10,29 +12,29 @@
             <div class="card-body">
                 
             <div class="mb-3">
-                <label for="exampleFormControlInput1" value="{{$agendaEdit->name}}" class="form-label">Nama Agenda</label>
-                <input type="text" name="name" class="form-control" name="name" id="exampleFormControlInput1"
+                <label for="exampleFormControlInput1" class="form-label">Nama Agenda</label>
+                <input type="text" name="name" value="{{$agendaEdit->name}}" class="form-control" name="name" id="exampleFormControlInput1"
                 placeholder="nama">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                <textarea placeholder="Deskipsikan agenda yang anda buat" name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3">value="{{$agendaEdit->desc}}"</textarea>
+                <textarea placeholder="Deskipsikan agenda yang anda buat" name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$agendaEdit->desc}}</textarea>
               </div> 
     
             </div>    
             </div> 
             <br>
             {{-- agenda item --}}
-            @foreach ($collection as $item)
+            @foreach ($items as $item)
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="1" placeholder="item agenda 1" id="myInput" >
-                <a class="btn" style="background-color: #FECB4D" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <input type="text" class="form-control" value="{{$item->step}}" name="{{"data".$item->id}}" placeholder="item agenda 1" id="myInput" >
+                <a class="btn" style="background-color: #FECB4D" data-bs-toggle="collapse" href="{{"#collapseExampl".$item->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                     <i class="bi bi-plus"></i>
                 </a>
             </div>
             
-            <div class="collapse" id="collapseExample" style="margin-bottom:10px">
-                <textarea placeholder="deskripsi item agenda" name="descitem1" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+            <div class="collapse" id="{{'collapseExampl'.$item->id}}" style="margin-bottom:10px">
+                <textarea placeholder="deskripsi item agenda" name="{{'desc'.$item->id}}" class="form-control" id="exampleFormControlTextarea1" rows="2">{{$item->desc}}</textarea>
             </div>
             @endforeach
             {{-- end agenda item --}}
@@ -40,11 +42,11 @@
         <div id="form"></div>
         <button type="button" onclick="myFunction()" class="btn btn-outline-primary"
             style="border-style: dotted;width:48%">Tambah Item</button>
-        <button type="submit" class="btn btn-warning" style="float:right;width:48%">Buat</button>
+        <button type="submit" class="btn btn-warning" style="float:right;width:48%">Edit</button>
     </form>
-} 
+
 @endif  
-@if (!isset($agendaEdit) and !isset($agendaView))
+@if (!isset($agendaEdit) )
 <form method="POST" action="{{ url('/agenda/add') }}">
     @csrf
          {{-- titile and description --}}

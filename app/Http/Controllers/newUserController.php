@@ -22,6 +22,8 @@ class newUserController extends Controller
         $id=$this->Query->insertData('tb_group',$request->except(['_token']));
         $this->Query->insertData('tb_anggota',
         ['id_group'=>$id,'id_user'=>Auth::id(),'role'=>1]);
+        session(['group_all' => $this->Logic->getallgroup()]);
+        session(['group'=>session('group_all')[0]]); 
         return redirect('/home')->with('succ','Group Succesfull created!');
       }
 

@@ -14,10 +14,10 @@ class TbAbsen extends Migration
     public function up()
     {
         Schema::create('tb_absen', function (Blueprint $table) {
-            $table->id()->primary();
-            $table->integer('user_id');
-            $table->integer('event_id');
-            $table->timestamps();
+            $table->id();
+            $table->integer('id_hub');
+            $table->integer('peserta');
+            
         });
     }
 

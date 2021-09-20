@@ -14,11 +14,12 @@ class TbAgendaitems extends Migration
     public function up()
     {
         Schema::create('tb_agendaitems', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->integer('id_agenda');
             $table->string('step');
-            $table->text('desc');
-            $table->timestime();
+            $table->text('desc')->nullable();
+            $table->boolean('finish');
+            $table->timestamps();
         });
     }
 

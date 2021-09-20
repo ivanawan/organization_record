@@ -80,6 +80,9 @@ class QueryController extends Controller
     public function deleteData($table,$column,$param){
       DB::table($table)->where($column,$param)->delete();
     }
+    public function getTwoCondition($table,$param){
+     return DB::table($table)->where($param[0],$param[1])->where($param[2],$param[3])->get();
+    }
     public function deleteTwoCondition($table,$param){
       DB::table($table)->where($param[0],$param[1])->where($param[2],$param[3])->delete();
     }

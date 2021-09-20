@@ -21,17 +21,32 @@ class AgendaController extends Controller
     return redirect('/agenda')->with(['scc'=>'agenda baru ditambahkan']);
     }
     public function viewEdit($id){
-    
       return view('agendaCrud',[
-          'agendaEdit'=>$this->Query->getWhere('tb_agenda','id',$id),
-          'item'=>$this->Query->getWhere('tb_agendaitems','id_agenda',$id)
+          'agendaEdit'=>$this->Query->getFrist('tb_agenda','id',$id),
+          'items'=>$this->Query->getWhere('tb_agendaitems','id_agenda',$id)
         ]);
     }
 
     public function delete($id){  
     $this->Query->deleteData('tb_agenda','id',$id);
     $this->Query->deleteData('tb_agendaitems','id_agenda',$id);
-    return redirect('/agenda')->with(['err'=>'data berhasil di hapus']);       
+    return redirect('/agenda')->with(['wrn'=>'data berhasil di hapus']);       
+    }
+    public function edit(Request $request,$id){
+     $this->logic->editAgenda($request->except('_token'),$id);
+    return redirect('/agenda')->with(['prm'=>'data berhasil di Edit']);       
+    } 
+
+    public function viewAgenda($id){
+        return view('agendaView',[
+            'agendaView'=>$this->Query->getFrist('tb_agenda','id',$id),
+            'items'=>$this->Query->getWhere('tb_agendaitems','id_agenda',$id)
+          ]);
+    }
+
+    public function checkList(Request $request,$id){
+        $this->logic->checkList($request->except('_token'),$id);     
+        return redirect('/agenda')->with(['scc'=>'data change']);
     }
 
 }

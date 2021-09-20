@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // route view yang tidak memerlukan controller
 
@@ -54,6 +54,7 @@ Route::Post('event/absen/{id}',[App\Http\Controllers\EventController::class, 'ab
 Route::Post('/event/edit/{id}',[App\Http\Controllers\EventController::class, 'editEvent'])->middleware(['session']);
 Route::get('/event/delete/{id}',[App\Http\Controllers\EventController::class, 'deleteEvent'])->middleware(['session']);
 // group
+Route::get('/group/role/{id}',[App\Http\Controllers\GroupController::class, 'roleGroup'])->middleware(['session']);
 Route::get('/group/delte/{id}',[App\Http\Controllers\GroupController::class, 'deletefromwaitinglist'])->middleware(['session']);
 Route::put('/group/edit/eden',[App\Http\Controllers\GroupController::class, 'editNameAndDesc'])->middleware(['session']);
 Route::get('/group/addtogroup/{id}',[App\Http\Controllers\GroupController::class, 'addtogroup'])->middleware(['session']);
@@ -68,6 +69,8 @@ Route::post('/keuangan/add',[App\Http\Controllers\KeuanganController::class, 'ad
 Route::get('/group/{code}',[App\Http\Controllers\HomeController::class, 'publicPage']);
 //user
 Route::get('/user',[App\Http\Controllers\UserController::class, 'index']);
+Route::put('/user/edit',[App\Http\Controllers\UserController::class, 'userEdit']);
+Route::Post('/user/edit/pass',[App\Http\Controllers\UserController::class, 'changePassword']);
 Route::get('/group/out/{id}/{role}',[App\Http\Controllers\UserController::class, 'groupOut']);
 Route::get('/group/delete/{id}/{role}',[App\Http\Controllers\UserController::class, 'groupDelete']);
 //Agenda 
@@ -75,7 +78,9 @@ Route::get('/agenda',[App\Http\Controllers\AgendaController::class, 'index']);
 Route::post('/agenda/add',[App\Http\Controllers\AgendaController::class, 'store']);
 Route::get('/agenda/delete/{id}',[App\Http\Controllers\AgendaController::class, 'delete']);
 Route::get('/agenda/edit/{id}',[App\Http\Controllers\AgendaController::class, 'viewEdit']);
-
+Route::Post('/agenda/edit/{id}',[App\Http\Controllers\AgendaController::class, 'edit']);
+Route::get('/agenda/view/{id}',[App\Http\Controllers\AgendaController::class, 'viewAgenda']);
+Route::Post('/agenda/view/{id}',[App\Http\Controllers\AgendaController::class, 'checkList']);
 Route::get('/agenda/add',function(){
     return view('agendaCrud');
 });

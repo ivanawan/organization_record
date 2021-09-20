@@ -16,7 +16,7 @@ class Waitinglist extends Migration
         Schema::create('tb_waitinglist', function (Blueprint $table) {
             $table->id();
             $table->integer('id_user');
-            $table->string('id_group');
+            $table->integer('id_group');
             $table->timestamps();
             });
     }

@@ -17,10 +17,10 @@ class Acara extends Migration
             $table->id();
             $table->integer('id_group');
             $table->string('name');
-            $table->string('dimana');
-            $table->text('deskripsi');
-            $table->date('waktu_awal');
-            $table->date('waktu_akhir')->nullable();
+            $table->string('lokasi');
+            $table->text('deskripsi')->nullable();
+            $table->date('tanggal');
+            $table->string('waktu');
             $table->timestamps();
             });
     }

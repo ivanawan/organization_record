@@ -13,9 +13,10 @@ class Kelompok extends Migration
      */
     public function up()
     {
-        Schema::create('kelompok', function (Blueprint $table) {
-            $table->string('id')->primary();
-            // $table->foreignId('user_id')->nullable()->index();
+        Schema::create('tb_kelompok', function (Blueprint $table) {
+            $table->id();
+            $table->integer('id_group');
+            $table->string('name_k');
         });
     }
 
@@ -26,6 +27,6 @@ class Kelompok extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('tb_kelompok');
     }
 }

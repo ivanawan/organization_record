@@ -23,6 +23,7 @@ class EventController extends Controller
     public function addEvent(Request $request)
     {
         $request['id_group'] = session('group')['id_group'];
+        $request['created_at']= now();
         $this->Query->insertData('tb_acara', $request->except(['_token']));
         return redirect('/event');
     }

@@ -91,4 +91,15 @@ class GroupController extends Controller
         ); 
         return redirect('/group');       
     }
+
+    public function roleGroup($id){
+    $all=session('group_all');
+    
+    foreach($all as $a){
+       if($a['id_group']==$id){
+        session(['group'=>$a]); 
+       }
+    }
+     return back();
+    }
 }

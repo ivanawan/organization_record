@@ -95,17 +95,18 @@
                                         <a class="dropdown-item" style="background-color:#DBF1FF" href="#!">{{$jabatan ?? ''}}</a>
                                         <div class="dropdown-divider"></div>
                                           {{-- ++++++++++++form cherck +++++++++++++++ --}}
-                                          <div class="container">
-                                          @foreach ($all as $item)
                                           
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="{{$item['id_group']}}" name="flexRadioDefault" id="flexRadioDefault2" @if($item['id_group']==session('group')['id_group']) checked @endif>
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                              {{Str::limit($item['name'],10) }}
-                                            </label>
-                                          </div>
+                                          @foreach ($all as $item)
+                                          <a class="dropdown-item" href="{{url('/group/role/'.$item['id_group'])}}" 
+                                          @if($item['id_group']==$data['id_group']) style="background-color:#DBF1FF" @endif >
+                                          {{Str::limit($item['name'],11) }}
+                                          @if($item['id_group']==$data['id_group'])
+                                          <i style="color:green" class="bi bi-check-lg">
+                                          </i>
+                                          @endif
+                                          </a>
                                           @endforeach
-                                          </div>
+                                    
                                           {{-- ++++++++++++form cherck +++++++++++++++ --}}
                                           <div class="dropdown-divider"></div>
                                           @endif
@@ -167,20 +168,15 @@
                   @yield('content')
 
                 </div>
-               </div>
                 <br>
                 @php
                 $year=date('Y');    
                 @endphp
                 {{-- <div id="footer" >  --}}
-                  <footer style="background-color:#1EA5FC">
-                    {{-- <p style="align-content: center"> --}}
-                    &copy; Copyright {{$year}},
-                    Develop by <a href="http://ivanawan.github.io">ivan setiawan</a>
-                    source code at <a href="https://github.com/ivanawan/organization_record">https://github.com/ivanawan/organization_record</a>
                   
-                  </footer>
-                {{-- </div> --}}
+                  <div id="footer" class="text-center"> <p>&copy; Copyright {{$year}}, Develop by <a href="http://ivanawan.github.io">ivan setiawan </a> </p> </div>
+                </div>
+                
                 
         <!-- Bootstrap core JS-->
         <script src="{{asset('js/bootstrap.bundle.min.js')}}" ></script>

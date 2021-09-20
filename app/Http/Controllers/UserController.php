@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\logicController;
 use App\Http\Controllers\QueryController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {   
@@ -13,7 +16,7 @@ class UserController extends Controller
         $this->logic = new logicController;
     }
     public function index(){
-     
+    //  dd(Auth::user()->name);
      return view('user');
     }
     /**  handle out from group
@@ -53,7 +56,9 @@ class UserController extends Controller
          
         }
         session(['group_all' => $this->logic->getallgroup()]);
-        session(['group'=>session('group_all')[0]]); 
+        if(session('group')['id_group']==$id){
+            session(['group'=>session('group_all')[0]]); 
+        }
         return redirect('/user')->with(['scc'=>'success out from group :D']);
     }
     /** merubah role user pada tb_anggota menjadi ketua(1)
@@ -73,7 +78,28 @@ class UserController extends Controller
         $this->Query->deleteData('tb_anggota','id_group',$id);  
         $this->Query->deleteData('tb_group','id',$id);
         session(['group_all' => $this->logic->getallgroup()]);
-        session(['group'=>session('group_all')[0]]); 
+        if(session('group')['id_group']==$id){
+            session(['group'=>session('group_all')[0]]); 
+        }
         return redirect('/user')->with(['scc'=>'success delete group :D']);
+    }
+
+    public function userEdit(Request $request){
+        if($request->username == Auth::user()->name and $request->email == Auth::user()->email){
+         return redirect('/user')->with(['wrn'=>'email & name tidak di ubah']);
+        }
+        User::where('id',Auth::id())->update(['email'=>$request->email,'name'=>$request->username]);
+        return redirect('/user')->with(['scc'=>'email & name berhasil di ubah ']);
+    }
+
+    public function changePassword(Request $request){
+        $user = User::where('id', Auth::id())->first();  
+        if($request->new_password != $request->confirim_pass){
+            return redirect('/user')->with(['wrn'=>'password tidak sama coba lagi...']);
+        }elseif (Hash::check($request->new_password, $user->password)) {
+            return redirect('/user')->with(['wrn'=>'password tidak sama dengan database coba lagi...']);
+        }
+        User::where('id', Auth::id())->update(['password'=>Hash::make($request->new_password)]);
+        return redirect('/user')->with(['scc'=>'password berhasil di ubah ']);
     }
 }
