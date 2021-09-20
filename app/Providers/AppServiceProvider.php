@@ -4,8 +4,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Carbon; 
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\URL;
+// use Illuminate\Support\Facades\Route;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,9 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (env('APP_ENV') === 'production') {
-            URL::forceSchema('https');
-        }
+        // if (env('APP_ENV') === 'production') {
+        //     URL::forceSchema('https');
+        // }
         Blade::directive('uang', function ($expression) {
             return "Rp. <?php echo number_format($expression, 0, ',', '.'); ?>";
         });
