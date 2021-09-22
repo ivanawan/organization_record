@@ -32,37 +32,30 @@
                 no have Data to Preview
               </div>
             @endif
+            
             @foreach ($data as $item)
-                @if ($item->role == 1)
+             
+              
 
                     {{-- alert-p --}}
                     <a type="button" data-bs-toggle="modal" 
-                    @if($last_data->id==$item->id)
+                        @if($last_data->id==$item->id)
                         data-bs-target="#editModal" 
-                    @else
+                        @else
                          data-bs-target="#exampleModal"
+                        @endif
                         date="{{ 'dibuat pada ' . Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y') }}"
-                        data-bs-whatever="{{ $item->keterangan }}"
-                    @endif
-                    >
+                        data-bs-whatever="{{ $item->keterangan }}">
+                          @if ($item->role == 1)
                         <div class="alert alert-primary" role="alert">
+                            @else
+                             <div class="alert alert-danger" role="alert">
+                                 @endif
                             <p style="float: right;"> +@uang($item->jumlah)</p>
                             {{ Str::title($item->name) }}
                         </div>
                     </a>
-                @else
-                    {{-- alert-p --}}
-                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        date="{{ 'dibuat pada ' . Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y') }}"
-                        data-bs-whatever="{{ $item->keterangan }}">
-                        <div class="alert alert-danger" role="alert">
-                            <p style="float: right; "> -@uang($item->jumlah)</p>
-                            {{ Str::title($item->name) }}
-                        </div>
-                    </a>
-                @endif
-             
-            
+                     
             @endforeach
         </div>
     </div>
@@ -139,7 +132,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Tambah Pengeluaran/ Pemasukan</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Edit Data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

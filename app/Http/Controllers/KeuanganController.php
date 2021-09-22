@@ -15,8 +15,6 @@ class KeuanganController extends Controller
     public function index(){  
         return view('keuangan',
         ['data'=>$data=$this->Query->pagition('tb_keuangan','id_group',session('group')['id_group']),
-        //  'total'=>$data->get(0)->total,
-        //  'last_id'=>$data->get(0)->id,
          'last_data'=>$data->first()
 
     ]);

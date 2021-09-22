@@ -174,8 +174,8 @@
                 $year=date('Y');    
                 @endphp
               
-                  
-                  <div id="footer" class="text-center"> <p>&copy; Copyright {{$year}}, Develop by <a href="http://ivanawan.github.io">ivan setiawan </a> </p> </div>
+                
+                  <div id="footer" class="text-center"> <p>&copy; Copyright {{$year}}, Develop by <a href="http://ivanawan.github.io">ivan setiawan </a>, and design by <a href="https://www.facebook.com/amrosyimaulana7">Amrosyi mulana</a>  </p> </div>
                 </div>
                 
                 

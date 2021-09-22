@@ -33,7 +33,7 @@
           <img class="block m-auto " src="{{asset('img/web.svg')}}"/>
         </div>
         <div class="mt-8">
-          <a class="text-3xl  hover:bg-yellow-500 inline-block py-2 px-3 rounded-lg  text-black hover:text-white" style="text-decoration: none">Publage</a>
+          <a class="text-3xl  hover:bg-yellow-500 inline-block py-2 px-3 rounded-lg  text-black hover:text-white" style="text-decoration: none">Public Page</a>
         </div>
       </div>
     </div>
@@ -41,10 +41,10 @@
      <div class="flex justify-center shadow-md hover:bg-blue-200  bg-gray-50 rounded-md p-6 ">
       <div class="flex flex-col ">
         <div class=" p-1" >
-          <img class="block m-auto " src="{{asset('img/group.svg')}}"/>
+          <img class="block m-auto " src="{{asset('img/version.svg')}}"/>
         </div>
         <div>
-          <p class="text-3xl mt-8">Group 16</p>
+          <p class="text-3xl mt-8">Source Code</p>
         </div>
       </div>
     </div> 
@@ -52,10 +52,10 @@
     <div class="flex justify-center shadow-md hover:bg-blue-200  bg-gray-50 rounded-md p-6 ">
       <div class="flex flex-col ">
         <div class=" p-1" >
-          <img class="block m-auto " src="{{asset('img/group.svg')}}"/>
+          <img class="block m-auto " src="{{asset('img/other.svg')}}"/>
         </div>
-        <div>
-          <p class="text-3xl mt-8">Group 16</p>
+        <div class="mt-32">
+          <p class="text-3xl ">About Me</p>
         </div>
       </div>
     </div>

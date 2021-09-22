@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Routing\UrlGenerator;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +12,7 @@ use Illuminate\Routing\UrlGenerator;
 | contains the "web" middleware group. Now create something great!
 |
 */
-if (env('APP_ENV') === 'production') {
-    URL::forceSchema('https');
-}
+
 
 
 Auth::routes(['verify' => true]);
