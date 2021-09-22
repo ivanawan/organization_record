@@ -102,4 +102,11 @@ class GroupController extends Controller
     }
      return back();
     }
+
+    public function deletePeserta($id){
+     $this->Query->deleteData('tb_kelompok','id',$id);
+     $this->Query->deleteData('tb_peserta','id_kelompok',$id);
+     $this->Query->deleteData('tb_hub','id_kelompok',$id);
+     return back()->with(['scc'=>"delete data berhasil "]); 
+    }
 }

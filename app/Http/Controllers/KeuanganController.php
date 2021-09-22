@@ -14,8 +14,12 @@ class KeuanganController extends Controller
     }
     public function index(){  
         return view('keuangan',
-        ['data'=>$data=$this->Query->pagition('tb_keuangan','id_group',session('group')['id_group'])
-        ,'total'=>$data->get(0)]);
+        ['data'=>$data=$this->Query->pagition('tb_keuangan','id_group',session('group')['id_group']),
+        //  'total'=>$data->get(0)->total,
+        //  'last_id'=>$data->get(0)->id,
+         'last_data'=>$data->first()
+
+    ]);
     }
     //get dataa from request then 
     public function add(Request $request){
@@ -36,5 +40,14 @@ class KeuanganController extends Controller
         $request['id_group']=session('group')['id_group'];
         $this->Query->insertData('tb_keuangan',$request->except('_token'));
         return back();
+    }
+
+    public function update(Request $request,$id){
+        $this->Query->updateData('tb_keuangan','id',$id,$request->except('_token'));
+        return back()->with(['wrn'=>'data berhasil di edit']);
+    }
+    public function delete($id){
+        $this->Query->deleteData('tb_keuangan','id',$id);
+        return back()->with(['wrn'=>'data berhasil di hapus']);
     }
 }

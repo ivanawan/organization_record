@@ -9,10 +9,10 @@
                     <div style="float:right">
                         <div class="input-group mb-3">
                             @php
-                                if ($total == null) {
+                                if ($last_data == null) {
                                     $total = 0;
-                                } else {
-                                    $total = $total->total;
+                                }else {
+                                   $total=$last_data->total;
                                 }
                             @endphp
                             <input type="text" class="form-control" value="@uang($total)"
@@ -20,7 +20,7 @@
                                 readonly>
                             <button class="btn" style="background-color: #FECB4D" type="button" id="button-addon1"
                                 data-bs-toggle="modal" data-bs-target="#eventmodal">
-                                <i class="bi bi-plus-square"></i>
+                                <i class="bi bi-plus-lg"></i>
                             </button>
                         </div>
 
@@ -36,9 +36,15 @@
                 @if ($item->role == 1)
 
                     {{-- alert-p --}}
-                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    <a type="button" data-bs-toggle="modal" 
+                    @if($last_data->id==$item->id)
+                        data-bs-target="#editModal" 
+                    @else
+                         data-bs-target="#exampleModal"
                         date="{{ 'dibuat pada ' . Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y') }}"
-                        data-bs-whatever="{{ $item->keterangan }}">
+                        data-bs-whatever="{{ $item->keterangan }}"
+                    @endif
+                    >
                         <div class="alert alert-primary" role="alert">
                             <p style="float: right;"> +@uang($item->jumlah)</p>
                             {{ Str::title($item->name) }}
@@ -124,6 +130,49 @@
             </div>
         </div>
     </div>
+
+{{-- modal edit --}}
+ @if (!$last_data==null)
+     
+ 
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Tambah Pengeluaran/ Pemasukan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('/keuangan/edit/'.$last_data->id) }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">nama</label>
+                        <input type="text" id="nama" value="{{$last_data->name}}" class="form-control" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">jumlah</label>
+                        <input type="text"  class="form-control"  value="{{$last_data->jumlah}}"  name="jumlah" id="rupiah">
+                    </div>
+                    <select class="form-select" id="role" name="role" aria-label="Default select example">
+                        <option value="1" @if($last_data->role==1)selected @endif>Pemasukan</option>
+                        <option value="0" @if($last_data->role==0)selected @endif>Pengeluaran</option>
+
+                    </select>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
+                        <textarea class="form-control" name="keterangan" id="keterangan"
+                            rows="3">{{$last_data->keterangan}}</textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <a type="button"  href="{{ url('/keuangan/delete/'.$last_data->id) }}" class="btn btn-danger" >Delete</a>
+                <button type="submit" class="btn btn-warning">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 @endsection
 @section('script')
     <script>
@@ -147,6 +196,8 @@
             // modalBodyInput.value = recipient
         })
 
+       
+    
         var rupiah = document.getElementById("rupiah");
         rupiah.addEventListener("keyup", function(e) {
             // tambahkan 'Rp.' pada saat form di ketik

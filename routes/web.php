@@ -53,6 +53,7 @@ Route::get('/group',[App\Http\Controllers\GroupController::class, 'index'])->mid
 // event
 Route::post('/event/add',[App\Http\Controllers\EventController::class, 'addEvent'])->middleware(['session']);
 Route::get('/absen/{id}',[App\Http\Controllers\EventController::class, 'absenEvent'])->middleware(['session']);
+Route::get('/absen/reset/{id}',[App\Http\Controllers\EventController::class, 'resetAbsen'])->middleware(['session']);
 Route::post('/event/kelompok/{id}',[App\Http\Controllers\EventController::class, 'pilihKelompok'])->middleware(['session']);
 Route::Post('event/absen/{id}',[App\Http\Controllers\EventController::class, 'absenEventData'])->middleware(['session']);
 Route::Post('/event/edit/{id}',[App\Http\Controllers\EventController::class, 'editEvent'])->middleware(['session']);
@@ -67,8 +68,12 @@ Route::post('/group/add/anggota',[App\Http\Controllers\GroupController::class, '
 Route::post('/group/addpeserta',[App\Http\Controllers\GroupController::class, 'tambahpeserta'])->middleware(['session']);
 Route::get('/peserta/{id}',[App\Http\Controllers\GroupController::class, 'getPeserta'])->middleware(['session']);
 Route::post('/group/edit/peserta/{id}',[App\Http\Controllers\GroupController::class, 'editData'])->middleware(['session']);
+Route::get('/peserta/delete/{id}',[App\Http\Controllers\GroupController::class, 'DeletePeserta'])->middleware(['session']);
+
 // keuangan
 Route::post('/keuangan/add',[App\Http\Controllers\KeuanganController::class, 'add'])->middleware(['session']);
+Route::post('/keuangan/edit/{id}',[App\Http\Controllers\KeuanganController::class, 'update'])->middleware(['session']);
+Route::get('/keuangan/delete/{id}',[App\Http\Controllers\KeuanganController::class, 'delete'])->middleware(['session']);
 //public page 
 Route::get('/group/{code}',[App\Http\Controllers\HomeController::class, 'publicPage']);
 //user
@@ -88,3 +93,4 @@ Route::Post('/agenda/view/{id}',[App\Http\Controllers\AgendaController::class, '
 Route::get('/agenda/add',function(){
     return view('agendaCrud');
 });
+

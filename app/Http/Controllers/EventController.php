@@ -73,4 +73,11 @@ class EventController extends Controller
         $this->Query->deleteData('tb_acara', 'id', $id);
         return redirect('/event');
     }
+    public function resetAbsen($id){
+        $hub=$this->Query->getFrist('tb_hub','id_acara',$id);
+        $this->Query->deleteData('tb_absen','id_hub',$hub->id);
+        $this->Query->deleteData('tb_hub','id_acara',$id);
+        return back()->with(['wrn'=>"absen berhasil di reset"]);
+
+    }
 }

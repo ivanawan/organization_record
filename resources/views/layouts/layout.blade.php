@@ -18,6 +18,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('css/style.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet"> 
     </head>
     <body style="background-color: #ecf8fc">
@@ -25,7 +26,7 @@
                 <!-- Top navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color:#1EA5FC;font-family: 'Poppins', sans-serif;">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#" style="margin-right: 20% ; margin-left:5%;color:#fff">Navbar</a>
+                        <a class="navbar-brand" href="#" style="margin-right: 20% ; margin-left:5%;color:#fff">Organization Record</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
@@ -134,7 +135,7 @@
                     </div>
                 </nav>
                 <!-- Page content-->
-                <div  id="content-wrap" class="container" style="padding-top:25px">
+                <div   class="sm:p-0 md:p-16 lg:p-24 md:pt-5 lg:pt-9 sm:pt-0" >
                   @if($msg=Session::get('prm'))
                   <div class="alert alert-primary" role="alert">
                     {{$msg}}
@@ -168,11 +169,11 @@
                   @yield('content')
 
                 </div>
-                <br>
+
                 @php
                 $year=date('Y');    
                 @endphp
-                {{-- <div id="footer" >  --}}
+              
                   
                   <div id="footer" class="text-center"> <p>&copy; Copyright {{$year}}, Develop by <a href="http://ivanawan.github.io">ivan setiawan </a> </p> </div>
                 </div>
@@ -183,7 +184,7 @@
         <!-- Core theme JS-->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="{{asset('js/scripts.js')}}" ></script>
-        
+        <script src="{{ asset('js/app.js') }}"></script>
           @yield('script')
             
     </body>

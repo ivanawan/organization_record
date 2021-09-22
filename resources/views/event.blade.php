@@ -6,7 +6,7 @@
     <div class="container">
         <button type="button" style="float:right; " class="btn btn-warning" data-bs-toggle="modal"
             data-bs-target="#eventmodal">
-            <i class="bi bi-plus-square"></i>
+            <i class="bi bi-plus-lg"></i>
         </button>
     </div>
 
@@ -24,6 +24,9 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" href="{{ url('/absen/' . $item->id) }}">Absen </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ url('/absen/reset/' . $item->id) }}">Reset Absen </a>
                         </li>
                         <li>
                             <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"

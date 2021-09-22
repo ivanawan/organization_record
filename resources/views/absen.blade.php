@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="container" style="padding-left:20%;padding-right:20%">
+    <div class="sm:pr-0 sm:pl-0 md:pr-10 md:pl-10 lg:pr-40 lg:pl-40">
         @if (!isset($list))
             {{-- absen --}}
             <form method="POST" action="{{ url('/event/absen/' . $id) }}">

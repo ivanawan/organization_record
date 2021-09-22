@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="container" style="padding-left:20%;padding-right:20%">
+<div class="sm:pr-0 sm:mb-2 md:mb-6 sm:pl-0 md:pr-10 md:pl-10 lg:pr-40 lg:pl-40" >
 
   
 @if(isset($agendaEdit))
@@ -23,7 +23,8 @@
     
             </div>    
             </div> 
-            <br>
+        <br>
+            
             {{-- agenda item --}}
             @foreach ($items as $item)
             <div class="input-group mb-3">
@@ -44,6 +45,9 @@
             style="border-style: dotted;width:48%">Tambah Item</button>
         <button type="submit" class="btn btn-warning" style="float:right;width:48%">Edit</button>
     </form>
+<br>
+<br>
+
 
 @endif  
 @if (!isset($agendaEdit) )

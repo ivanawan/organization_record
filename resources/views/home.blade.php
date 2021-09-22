@@ -2,14 +2,9 @@
 
 
 @section('content')
-    <div class="container">
-        @if (Auth::check())
-        
-        @endif 
-        <br>
-        <br>
+
         {{-- panel group & pengurus --}}
-        <div class="card">
+        <div class="card sm:mb-3" >
             <div class="card-body">
                 <h3 style="color: #39A2DB"> {{ Str::title($group->name) }} </h3>
                 <br>
@@ -77,7 +72,7 @@
                     {{-- grafik --}}
                    @if (isset($grafik))
                     <div class="card-body">
-                        <canvas id="myChart" width="400" height="200"></canvas>
+                        <canvas id="myChart" ></canvas>
                     </div>
                     @endif
                     {{-- end grafik --}}
@@ -86,17 +81,17 @@
                     <h4 style="color: #39A2DB; float:right">Bulan {{ Carbon\Carbon::now()->isoFormat('MMMM') }}</h4>
                     <br>
                     <div class="row justify-content-start">
-                        <div class="col-2">
+                        <div class="col-sm-1 col-md-2 col-lg-2">
                             <label class="label-form">Pengeluaran :</label>
                             <a class="btn btn-outline-danger">@uang($keuangan[0])</a>
 
                         </div>
-                        <div class="col-2">
+                        <div class="col-sm-1 col-md-2 col-lg-2">
                             <label class="label-form">Pemasukan :</label>
                             <a class="btn btn-outline-primary">@uang($keuangan[1])</a>
 
                         </div>
-                        <div class="col-2">
+                        <div class="col-sm-1 col-md-2 col-lg-2">
                             <label class="label-form">Total :</label><br>
                             <a class="btn btn-outline-warning">@uang($keuangan[2])</a>
 
@@ -183,9 +178,10 @@
                     
             </div>
         </div>
-        
+        <br>
+    
        
-    </div>
+    {{-- </div> --}}
 @endsection
 @section('script')
     <script>

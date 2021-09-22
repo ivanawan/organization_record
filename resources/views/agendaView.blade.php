@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="container" style="padding-left:20%;padding-right:20%">
+<div class="sm:pr-0 sm:mb-2 md:mb-6 sm:pl-0 md:pr-10 md:pl-10 lg:pr-40 lg:pl-40">
 
     @csrf
     {{-- titile and description --}}
@@ -21,7 +21,7 @@
         @csrf
     <div class="accordion accordion-flush" id="accordionFlushExample">
     @foreach ($items as $item)
-        <div class="accordion-item">
+        <div class="accordion-item ">
             <h2 class="accordion-header" id="headingTwo">
               <div class="row">
                   <div class="col-11">

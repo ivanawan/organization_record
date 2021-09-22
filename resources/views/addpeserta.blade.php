@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <div class="container" style="padding-left:20%;padding-right:20%">
+    <div class="sm:pr-0 sm:pl-0 md:pr-10 md:pl-10 lg:pr-40 lg:pl-40" >
         @if (!isset($kelompok))
             {{-- form add data --}}
             <form method="POST" action="{{ url('/group/addpeserta') }}">
@@ -13,6 +13,7 @@
                     <input type="text" class="form-control" name="name" id="exampleFormControlInput1"
                         placeholder="nama kelompok">
                 </div>
+                <label for="exampleFormControlInput1" class="form-label">Daftar Anggota</label>
                 <div class="mb-3">
                     <input type="text" name="peserta1" class="form-control" id="exampleFormControlInput1"
                         placeholder="nama peserta 1">
