@@ -11,7 +11,7 @@
           <img class="block m-auto p-5" src="{{asset('img/akun.svg')}}"/>
         </div>
         <div>
-          <p class="text-3xl mt-4">User <span class="text-indigo-400">160</span></p>
+          <p class="text-3xl mt-4">User <span class="text-indigo-400">{{$user}}</span></p>
         </div>
       </div>
     </div> 
@@ -22,7 +22,7 @@
           <img class="block m-auto p-3" src="{{asset('img/group.svg')}}"/>
         </div>
         <div>
-          <p class="text-3xl mt-9">Group <span class="text-green-400">160</span> </p>
+          <p class="text-3xl mt-9">Group <span class="text-green-400">{{$group}}</span> </p>
         </div>
       </div>
     </div>
@@ -35,8 +35,9 @@
         <div class="mt-8 dropdown">
           <button class="text-3xl  hover:bg-yellow-500 inline-block py-2 px-3 rounded-lg  text-black hover:text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Public Page</button>
             <div class="dropdown-menu input-group mb-3" aria-labelledby="dropdownMenuButton1"> 
-            <form  action="{{url('/jhjhdj')}}" method="get">
-          <input  class="ml-3 mt-2" placeholder="Enter Code Group" />
+            <form  action="{{url('/public_page')}}" method="POST">
+              @csrf
+          <input  class="ml-3 mt-2" name="code" placeholder="Enter Code Group" />
           <button  class="btn float-right mr-3 bg-blue-600" type="submit">
             <i class="bi bi-search"></i>
           </button>

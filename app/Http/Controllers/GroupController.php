@@ -21,7 +21,7 @@ class GroupController extends Controller
             'data' => $this->Query->joinWaitinglist(),
             'anggota' => $this->Query->joinanggota(),
             'peserta' => $this->Query->getWhere('tb_kelompok', 'id_group', session('group')['id_group']),
-            'group'=>$this->Query->getFrist('tb_group','id',session('group')),
+            'group'=>$this->Query->getFrist('tb_group','id',session('group')['id_group']),
         ]);
     }
 

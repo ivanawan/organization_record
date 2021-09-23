@@ -3,21 +3,20 @@
 @section('content')
 
 
-    <div class="container">
-        <button type="button" style="float:right; " class="btn btn-warning" data-bs-toggle="modal"
+    <div class=" flex justify-end">
+        <button type="button "  class="btn btn-warning m-3" data-bs-toggle="modal"
             data-bs-target="#eventmodal">
             <i class="bi bi-plus-lg"></i>
         </button>
     </div>
 
-    <br>
-    <br>
+    
     @forelse ($data as $item)
     
    
-        <div class="card">
+        <div class="card shadow-md">
             <div class="card-body">
-                <div class="btn-group" style="float: right">
+                <div class="btn-group " style="float: right">
                     <a type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-three-dots-vertical"></i>
                     </a>

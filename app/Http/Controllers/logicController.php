@@ -46,20 +46,7 @@ class logicController extends Controller
         return redirect('/group');
     }
     
-    // function getPeserta(){
-    //     $arr;
-    //     $Query = new QueryController;
-    //     $kelompok=$Query->getWhere('tb_kelompok','id_group',session('group')['id_group']);
-        
-    //     for($i=0;$i <= sizeof($kelompok)-1;$i++){
-    //      $arr[]=[
-    //          "id"=>$kelompok[$i]->id,
-    //          "nama"=>$kelompok[$i]->name_k,
-    //          "peserta"=>$Query->getWhere('tb_peserta','id_kelompok',$kelompok[$i]->id)         
-    //         ];
-    //     }
-    //     dd($arr);
-    // }
+  
 
     function insertDataAbsen($arrayInput,$arrayChecked,$idHub){
         $Query = new QueryController;
@@ -288,4 +275,5 @@ class logicController extends Controller
         return [$arr,$finis_data];
    }
 
+   
 }

@@ -49,6 +49,9 @@ class HomeController extends Controller
     public function publicPage(Request $request,$code){
         $data=$this->Query->getFrist('tb_group','code',$code);
         // set session
+        if($data==null){
+            return view('empty')->with(['scc'=>'success out from group :D']);
+        }
         session(['group'=>[
                            'id_group'=>$data->id,
                            'name'=>$data->name
@@ -71,4 +74,7 @@ class HomeController extends Controller
         ]);
     }
 
+    public function public_page(Request $request){
+     return redirect('/group/'.$request->code);
+    }
 }

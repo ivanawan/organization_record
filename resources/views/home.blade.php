@@ -71,9 +71,9 @@
                     <br>
                     {{-- grafik --}}
                    @if (isset($grafik))
-                    <div class="card-body">
+                    {{--  <div class="card-body">  --}}
                         <canvas id="myChart" ></canvas>
-                    </div>
+                    {{--  </div>  --}}
                     @endif
                     {{-- end grafik --}}
                     <br>  
@@ -87,12 +87,12 @@
 
                         </div>
                         <div class="col-sm-1 col-md-2 col-lg-2">
-                            <label class="label-form">Pemasukan :</label>
+                            <label class="label-form">Pemasukan  :</label>
                             <a class="btn btn-outline-primary">@uang($keuangan[1])</a>
 
                         </div>
                         <div class="col-sm-1 col-md-2 col-lg-2">
-                            <label class="label-form">Total :</label><br>
+                            <label class="label-form">Total      :</label><br>
                             <a class="btn btn-outline-warning">@uang($keuangan[2])</a>
 
                         </div>

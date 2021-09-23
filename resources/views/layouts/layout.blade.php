@@ -21,12 +21,12 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet"> 
     </head>
-    <body style="background-color: #ecf8fc">
-      <div id="page-container">
+    <body  class="min-h-full sm:bg-white md:bg-white lg:bg-blue-600 lg:bg-opacity-5">
+      <div id="page-container" >
                 <!-- Top navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color:#1EA5FC;font-family: 'Poppins', sans-serif;">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#" style="margin-right: 20% ; margin-left:5%;color:#fff">Organization Record</a>
+                        <a class="navbar-brand" href="#" style="margin-right: 20% ; margin-left:5%;color:#fff">Organization </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
@@ -175,8 +175,8 @@
                 @endphp
               
                 
-                  <div id="footer" class="text-center"> <p>&copy; Copyright {{$year}}, Develop by <a href="http://ivanawan.github.io">ivan setiawan </a>, and design by <a href="https://www.facebook.com/amrosyimaulana7">Amrosyi mulana</a>  </p> </div>
-                </div>
+            </div>
+            <div class=" sm:h-11  text-white  text-center bg-blue-500"> &copy; Copyright {{$year}}, Develop by <a href="http://ivanawan.github.io">ivan setiawan </a>, and design by <a href="https://www.facebook.com/amrosyimaulana7">Amrosyi mulana</a> </div>
                 
                 
         <!-- Bootstrap core JS-->

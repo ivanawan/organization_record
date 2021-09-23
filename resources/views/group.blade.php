@@ -2,17 +2,18 @@
 
 
 @section('content')
-    <a type="button" style="float:right ; background-color:#1EA5FC;margin-left:15px; color:#fff" class="btn "
+   <div class=" flex justify-end">
+    <a type="button" style="float:right ; background-color:#1EA5FC;margin-left:15px; color:#fff" class="btn  m-3"
         href="{{ url('/group/addpeserta') }}">
         <i class="bi bi-people"></i>
     </a>
 
-    <button type="button" style="float:right; color:#fff " class="btn btn-warning" data-bs-toggle="modal"
+    <button type="button" style="float:right; color:#fff " class="btn btn-warning  m-3"  data-bs-toggle="modal"
         data-bs-target="#staticBackdrop">
         <i class="bi bi-person-plus"></i>
     </button>
-    <br><br>
-    <div class="card">
+    </div>
+    <div class="card shadow-md">
         <div class="card-body">
        <form method="POST" action="{{url('/group/edit/eden')}}">
         @csrf
@@ -21,15 +22,15 @@
             <input type="text" name="name" class="form-control"   value="{{$group->name}}">
           </div>
           <div class="mb-3">
-            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" > {{$group->desc}}</textarea>
+            <textarea class="form-control"  name="desc" id="exampleFormControlTextarea1" > {{$group->desc}}</textarea>
           </div>
           <button type="submit" class="btn btn-warning">Edit</button>
        </form>
         </div>
     </div>
     <br>
-    <div class="card">
-        <div class="card-header">
+    <div class="card shadow-md">
+        {{--  <div class="card-header">
             <div style="float:right">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" value="{{$group->code }}" id="myInput" disabled readonly>
@@ -37,10 +38,10 @@
                         <i class="bi bi-link"></i>
                     </button>
                 </div>
-            </div>
-            <h3> Anggota Group</h3>
-        </div>
-        <div class="card-body" style="max-height: 80vh; overflow: auto;">
+            </div>  --}}
+            {{--  </div>  --}}
+            <div class="card-body" style="max-height: 80vh; overflow: auto;">
+            <h3 class="text-yellow-400"> # Anggota Group</h3>
 
             @foreach ($anggota as $item)
 
@@ -151,13 +152,13 @@
     @if (!$data->isEmpty())
 
         <div class="card">
-            <div class="card-header">
-                Waitinglist
+            {{--  <div class="card-header">
+                
 
-            </div>
+            </div>  --}}
 
             <div class="card-body" style="max-height: 80vh; overflow: auto;">
-
+            <h3 class=" text-yellow-400"># Waitinglist</h3>
                 @foreach ($data as $item)
 
 
@@ -190,10 +191,9 @@
     <br>
     @if(!$peserta->isEmpty())
     <div class="card">
-        <div class="card-header">
-            Kelompok Peserta
-        </div>
+        
         <div class="card-body" style="max-height: 80vh; overflow: auto;">
+            <h3 class="mb-4 text-yellow-400"># Kelompok Peserta</h3>
             @foreach ($peserta as $item)
             <div class="alert alert-primary" role="alert">
                 <a href="{{ url('/peserta/delete/' . $item->id) }}">

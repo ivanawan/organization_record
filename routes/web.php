@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,13 @@ Auth::routes(['verify' => true]);
 // route view yang tidak memerlukan controller
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome',[
+        'user'=>DB::table('users')->count(),
+        'group'=>DB::table('tb_group')->count()
+    ]);
 });
 
+Route::post('/public_page',[App\Http\Controllers\HomeController::class, 'public_page']);
 Route::get('/group/addpeserta',function(){
     return view('addpeserta');
 })->middleware(['login']);

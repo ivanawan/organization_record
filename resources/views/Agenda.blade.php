@@ -1,11 +1,11 @@
 @extends('layouts.layout')
 
 @section('content')
-<a class="btn btn-warning" href="{{url('/agenda/add')}}" style="float: right"><i class="bi bi-plus-lg"></i></a>
-<br>
-<br>
-<div class="card">
-    <div class="card-body">
+<div class=" flex justify-end ">
+    <a class="btn btn-warning m-3"   href="{{url('/agenda/add')}}" ><i class="bi bi-plus-lg"></i></a>
+</div>
+<div class="card ">
+    <div class="card-body ">
         @foreach ($agenda as $item)
         <div class="alert alert-primary" role="alert">
             <h6><a href="{{url('/agenda/view/'.$item->id)}}" style="text-decoration: none">{{$item->name}}</a></h6>
