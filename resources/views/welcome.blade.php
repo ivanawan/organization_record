@@ -32,8 +32,16 @@
         <div class=" p-1" >
           <img class="block m-auto " src="{{asset('img/web.svg')}}"/>
         </div>
-        <div class="mt-8">
-          <a class="text-3xl  hover:bg-yellow-500 inline-block py-2 px-3 rounded-lg  text-black hover:text-white" style="text-decoration: none">Public Page</a>
+        <div class="mt-8 dropdown">
+          <button class="text-3xl  hover:bg-yellow-500 inline-block py-2 px-3 rounded-lg  text-black hover:text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Public Page</button>
+            <div class="dropdown-menu input-group mb-3" aria-labelledby="dropdownMenuButton1"> 
+            <form  action="{{url('/jhjhdj')}}" method="get">
+          <input  class="ml-3 mt-2" placeholder="Enter Code Group" />
+          <button  class="btn float-right mr-3 bg-blue-600" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+        </div>
         </div>
       </div>
     </div>
@@ -43,8 +51,8 @@
         <div class=" p-1" >
           <img class="block m-auto " src="{{asset('img/version.svg')}}"/>
         </div>
-        <div>
-          <p class="text-3xl mt-8">Source Code</p>
+        <div class="mt-8">
+          <a href="https://github.com/ivanawan/organization_record" class="text-3xl  hover:bg-yellow-500 inline-block py-2 px-3 rounded-lg  text-black hover:text-white" style="text-decoration: none">Source Code</a>
         </div>
       </div>
     </div> 
@@ -55,7 +63,7 @@
           <img class="block m-auto " src="{{asset('img/other.svg')}}"/>
         </div>
         <div class="mt-32">
-          <p class="text-3xl ">About Me</p>
+          <a href="http://ivanawan.github.io" class="text-3xl  hover:bg-yellow-500 inline-block py-2 px-3 rounded-lg  text-black hover:text-white" style="text-decoration: none">About Me</a>
         </div>
       </div>
     </div>

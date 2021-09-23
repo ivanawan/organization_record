@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 // route view yang tidak memerlukan controller
 
