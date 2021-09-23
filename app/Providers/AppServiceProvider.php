@@ -25,9 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // if (env('APP_ENV') === 'production') {
-        //     URL::forceSchema('https');
-        // }
+        if(config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
         Blade::directive('uang', function ($expression) {
             return "Rp. <?php echo number_format($expression, 0, ',', '.'); ?>";
         });
