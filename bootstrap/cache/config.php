@@ -5,7 +5,7 @@
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost',
-    'asset_url' => NULL,
+    'asset_url' => 'https://organizationn.herokuapp.com/',
     'timezone' => 'UTC',
     'locale' => 'id',
     'fallback_locale' => 'en',
