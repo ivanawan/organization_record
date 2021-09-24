@@ -48,12 +48,15 @@
                         data-bs-whatever="{{ $item->keterangan }}">
                           @if ($item->role == 1)
                         <div class="alert alert-primary" role="alert">
-                            @else
-                             <div class="alert alert-danger" role="alert">
-                                 @endif
                             <p style="float: right;"> +@uang($item->jumlah)</p>
                             {{ Str::title($item->name) }}
-                        </div>
+                           </div>
+                            @else
+                             <div class="alert alert-danger" role="alert">
+                                 <p style="float: right;"> -@uang($item->jumlah)</p>
+                                 {{ Str::title($item->name) }}
+                                </div>
+                         @endif
                     </a>
                      
             @endforeach
