@@ -13,6 +13,7 @@ class KeuanganController extends Controller
         $this->session = session()->get('group');
     }
     public function index(){  
+        // dd(date('20y-m-d h:m:s'));
         return view('keuangan',
         ['data'=>$data=$this->Query->pagition('tb_keuangan','id_group',session('group')['id_group']),
          'last_data'=>$data->first()
@@ -20,27 +21,34 @@ class KeuanganController extends Controller
     ]);
     }
     //get dataa from request then 
-    public function add(Request $request){
+    public function add(Request $request,$total){
         $request['jumlah'] = preg_replace('/[^0-9.]+/', '', $request->jumlah);
         $request['jumlah'] =str_replace(".", "", $request->jumlah);
         
-        $data=$this->Query->getLast('tb_keuangan','id_group',session('group')['id_group']);
-        if($data == null ){
-             $data= 0;
-        }else{
-            $data=$data->total;
-        }
         if($request->role == 1){
-            $request['total']=$data + $request->jumlah;
+            $request['total']=$total + $request->jumlah;
         }else{
-            $request['total']=$data - $request->jumlah;
+            $request['total']=$total - $request->jumlah;
         }
+        $request['created_at']=now();
         $request['id_group']=session('group')['id_group'];
         $this->Query->insertData('tb_keuangan',$request->except('_token'));
         return back();
     }
 
     public function update(Request $request,$id){
+        $data_awal=$this->Query->getFrist('tb_keuangan','id',$id);
+                if($data_awal->role==1){
+                    $total=$data_awal->total - $data_awal->jumlah;
+                }else{
+                    $total=$data_awal->total + $data_awal->jumlah;
+                }
+                if($request->role == 1){
+                    $request['total']=$total + $request->jumlah;
+                }else{
+                    $request['total']=$total - $request->jumlah;
+                }
+            
         $this->Query->updateData('tb_keuangan','id',$id,$request->except('_token'));
         return back()->with(['wrn'=>'data berhasil di edit']);
     }

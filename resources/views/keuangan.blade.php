@@ -72,7 +72,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('/keuangan/add') }}" method="POST">
+
+                    <form action="{{ url('/keuangan/add/'.$total) }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">nama</label>

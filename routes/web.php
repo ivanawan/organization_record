@@ -73,7 +73,7 @@ Route::post('/group/edit/peserta/{id}',[App\Http\Controllers\GroupController::cl
 Route::get('/peserta/delete/{id}',[App\Http\Controllers\GroupController::class, 'DeletePeserta'])->middleware(['session']);
 
 // keuangan
-Route::post('/keuangan/add',[App\Http\Controllers\KeuanganController::class, 'add'])->middleware(['session']);
+Route::post('/keuangan/add/{total}',[App\Http\Controllers\KeuanganController::class, 'add'])->middleware(['session']);
 Route::post('/keuangan/edit/{id}',[App\Http\Controllers\KeuanganController::class, 'update'])->middleware(['session']);
 Route::get('/keuangan/delete/{id}',[App\Http\Controllers\KeuanganController::class, 'delete'])->middleware(['session']);
 //public page 

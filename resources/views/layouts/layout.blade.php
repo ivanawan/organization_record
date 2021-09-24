@@ -176,7 +176,7 @@
               
                 
             </div>
-            <div class=" sm:h-11  text-white  text-center bg-blue-500"> &copy; Copyright {{$year}}, Develop by <a href="http://ivanawan.github.io">ivan setiawan </a>, and design by <a href="https://www.facebook.com/amrosyimaulana7">Amrosyi mulana</a> </div>
+            <div class=" sm:h-11  text-white  text-center bg-blue-500"> &copy; Copyright {{$year}}, Develop by <a class=" text-white" href="http://ivanawan.github.io">ivan setiawan </a>, and design by <a class=" text-white" href="https://www.facebook.com/amrosyimaulana7">Amrosyi mulana</a> </div>
                 
                 
         <!-- Bootstrap core JS-->
