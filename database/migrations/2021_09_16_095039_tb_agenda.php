@@ -17,7 +17,7 @@ class TbAgenda extends Migration
             $table->id();
             $table->integer('id_group');
             $table->string('name');
-            $table->text('desc');
+            $table->text('desc')->nullable();
             $table->integer('alltask')->nullable();
             $table->integer('finistask')->nullable();
             $table->timestamps();

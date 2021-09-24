@@ -3,26 +3,49 @@
 
 @section('content')
    <div class=" flex justify-end">
-    <a type="button" style="float:right ; background-color:#1EA5FC;margin-left:15px; color:#fff" class="btn  m-3"
+    <a type="button" style=";margin-left:15px; color:#fff" class="btn btn-warning m-3"
+    href="{{ url('/group/'.$group->code) }}">
+    <i class="bi bi-file-earmark-code"></i>
+    </a>
+
+    <a type="button" style=" background-color:#1EA5FC;margin-left:15px; color:#fff" class="btn  m-3"
         href="{{ url('/group/addpeserta') }}">
         <i class="bi bi-people"></i>
     </a>
 
-    <button type="button" style="float:right; color:#fff " class="btn btn-warning  m-3"  data-bs-toggle="modal"
+    <button type="button" style=" color:#fff " class="btn btn-warning  m-3"  data-bs-toggle="modal"
         data-bs-target="#staticBackdrop">
         <i class="bi bi-person-plus"></i>
     </button>
+    </div>
+    <div class="bs-callout bs-callout-primary bg-white">
+        <li>
+           klik button <a class="btn btn-warning"> <i class="bi bi-person-plus"></i><a> untuk membuat akun anggota baru dan otomatis
+              akan dimasukan kedalam group.
+        </li>
+        <li>
+            klik button <a class="btn" style="background-color:#1EA5FC;"> <i class="bi bi-people"></i><a> untuk membuat kelompok peserta, 
+                yang nantinya kelompok ini akan dunakan untuk absensi event. 
+         </li>
+         <li>
+           klik button <a class="btn btn-warning"><i class="bi bi-file-earmark-code"></i></a> untuk memasuki public page,
+            public page adalah halaman dashboard yang dapat dikunjungi tanpa login / register akun. 
+         </li>
     </div>
     <div class="card shadow-md">
         <div class="card-body">
        <form method="POST" action="{{url('/group/edit/eden')}}">
         @csrf
         @method('PUT')
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">code group</span>
+            <input type="text" class="form-control" value="{{$group->code}}" id="basic-url" aria-describedby="basic-addon3" readonly>
+          </div>
         <div class="mb-3">
-            <input type="text" name="name" class="form-control"   value="{{$group->name}}">
+            <input type="text" name="name" class="form-control"   value="{{$group->name}}" required>
           </div>
           <div class="mb-3">
-            <textarea class="form-control"  name="desc" id="exampleFormControlTextarea1" > {{$group->desc}}</textarea>
+            <textarea class="form-control"  name="desc" id="exampleFormControlTextarea1"  required> {{$group->desc}}</textarea>
           </div>
           <button type="submit" class="btn btn-warning">Edit</button>
        </form>
@@ -30,16 +53,7 @@
     </div>
     <br>
     <div class="card shadow-md">
-        {{--  <div class="card-header">
-            <div style="float:right">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="{{$group->code }}" id="myInput" disabled readonly>
-                    <button class="btn" style="background-color: #FECB4D" onclick="myFunction()">
-                        <i class="bi bi-link"></i>
-                    </button>
-                </div>
-            </div>  --}}
-            {{--  </div>  --}}
+      
             <div class="card-body" style="max-height: 80vh; overflow: auto;">
             <h3 class="text-yellow-400"> # Anggota Group</h3>
 
@@ -253,22 +267,4 @@
         </div>
     </div>
 
-@endsection
-@section('script')
-    <script>
-        function myFunction() {
-            /* Get the text field */
-            var copyText = document.getElementById("myInput");
-
-            /* Select the text field */
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-            /* Copy the text inside the text field */
-            document.execCommand("copy");
-
-            /* Alert the copied text */
-            alert("Copied the text: " + copyText.value);
-        }
-    </script>
 @endsection

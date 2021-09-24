@@ -76,13 +76,13 @@
                         @csrf
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">nama</label>
-                            <input type="text" class="form-control" name="name" id="exampleFormControlInput1">
+                            <input type="text" class="form-control" name="name" id="exampleFormControlInput1" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">jumlah</label>
-                            <input type="text" class="form-control" name="jumlah" id="rupiah">
+                            <input type="text" class="form-control" name="jumlah" id="rupiah" required>
                         </div>
-                        <select class="form-select" name="role" aria-label="Default select example">
+                        <select class="form-select" name="role" aria-label="Default select example" required>
                             <option value="1" selected>Pemasukan</option>
                             <option value="0">Pengeluaran</option>
 
@@ -140,13 +140,13 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">nama</label>
-                        <input type="text" id="nama" value="{{$last_data->name}}" class="form-control" name="name">
+                        <input type="text" id="nama" value="{{$last_data->name}}" class="form-control" name="name" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">jumlah</label>
-                        <input type="text"  class="form-control"  value="{{$last_data->jumlah}}"  name="jumlah" id="rupiah">
+                        <input type="text"  class="form-control"  value="{{$last_data->jumlah}}"  name="jumlah" id="rupiah" required>
                     </div>
-                    <select class="form-select" id="role" name="role" aria-label="Default select example">
+                    <select class="form-select" id="role" name="role" aria-label="Default select example" required>
                         <option value="1" @if($last_data->role==1)selected @endif>Pemasukan</option>
                         <option value="0" @if($last_data->role==0)selected @endif>Pengeluaran</option>
 

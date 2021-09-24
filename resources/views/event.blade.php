@@ -106,7 +106,7 @@
                                         required />
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="waktu" timeformat="24h" class="form-control"
+                                    <input type="text" name="waktu" placeholder="waktu" timeformat="24h" class="form-control"
                                         class="form-control" required />
                                 </div>
                             </div>

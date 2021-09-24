@@ -175,7 +175,38 @@
                             </div>
                         </div><br>
                     @endforeach
-                    
+                    @if($agenda->isNotEmpty())
+                    <hr class="dropdown-divider" style="color:blue;height:2px">
+                    <br>
+                    <h4 style="color: #39A2DB"># Agenda</h4>
+                    <br>
+                    @foreach ($agenda as $item)
+                    <div class="alert alert-primary" role="alert">
+                        <h6><a href="{{url('/agenda/view/'.$item->id)}}" style="text-decoration: none">{{$item->name}}</a></h6>
+            
+                     <div class="conteiner" >
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <p style="font-size:10px;color:black">{{$item->finishtask.' / '.$item->alltask}}</p>
+                                 <div class="progress">
+                                    @php
+                                       if($item->finishtask==0){
+                                        $value=0;
+                                       }else { 
+                                           $value= $item->finishtask/$item->alltask;
+                                           $value=$value*100;  
+                                       }
+                                    @endphp
+                                    
+                                    <div class="progress-bar progress-bar-striped  bg-info" role="progressbar" style="{{'width:'.$value.'%'}}" aria-valuenow="{{$value}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    
+                               </div>
+                            </div>
+                         </div>
+                     </div>
+                     </div>                               
+                    @endforeach
+                    @endif
             </div>
         </div>
         <br>

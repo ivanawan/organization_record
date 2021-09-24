@@ -11,8 +11,9 @@
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama Kelompok</label>
                     <input type="text" class="form-control" name="name" id="exampleFormControlInput1"
-                        placeholder="nama kelompok">
+                        placeholder="nama kelompok" required>
                 </div>
+                <hr class="dropdown-divider" style="color:blue;height:2px">
                 <label for="exampleFormControlInput1" class="form-label">Daftar Anggota</label>
                 <div class="mb-3">
                     <input type="text" name="peserta1" class="form-control" id="exampleFormControlInput1"
@@ -32,6 +33,8 @@
                     <input type="text" class="form-control" name="name" value="{{ $kelompok[0]->name_k }}"
                         id="exampleFormControlInput1" placeholder="nama kelompok">
                 </div>
+                <hr class="dropdown-divider" style="color:blue;height:2px">
+                <label for="exampleFormControlInput1" class="form-label">Daftar Anggota</label>
                 @php
                     $i = 1;
                 @endphp

@@ -41,7 +41,9 @@ class logicController extends Controller
         $id=$Query->insertData('tb_kelompok',['id_group'=>session('group')['id_group'],"name_k"=>$arr['name']]);
         for($i=1;$i<=sizeof($arr)-1;$i++){
             $name="peserta".$i;
-            $Query->insertData('tb_peserta',["name"=>$arr[$name],"id_kelompok"=> $id]);
+            if($arr[$name]!= null){
+                $Query->insertData('tb_peserta',["name"=>$arr[$name],"id_kelompok"=> $id]);
+            }
         }
         return redirect('/group');
     }
@@ -192,23 +194,26 @@ class logicController extends Controller
        unset($arr['name'],$arr['desc']);
        
        foreach($arr as $a => $x){
+           
            if(gettype($a)== "integer"){
-               if(isset($arr['descitem'.$a])) {
-                  $new[]=[
-                      'id_agenda'=>$id,
-                      'step'=>$x,
-                      'desc'=>$arr['descitem'.$a],
-                      'finish'=>0
-                    ];
-               }else{
-                   $new[]=[
-                  'id_agenda'=>$id,
-                  'step'=>$x,
-                  'desc'=>null,
-                  'finish'=>0
-                ];
-               }
-           }
+               if($x!= null){
+                    if(isset($arr['descitem'.$a])) {
+                        $new[]=[
+                            'id_agenda'=>$id,
+                            'step'=>$x,
+                            'desc'=>$arr['descitem'.$a],
+                            'finish'=>0
+                            ];
+                    }else{
+                        $new[]=[
+                        'id_agenda'=>$id,
+                        'step'=>$x,
+                        'desc'=>null,
+                        'finish'=>0
+                        ];
+                    }
+                }
+          }
            
        }
        

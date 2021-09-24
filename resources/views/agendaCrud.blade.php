@@ -14,7 +14,7 @@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nama Agenda</label>
                 <input type="text" name="name" value="{{$agendaEdit->name}}" class="form-control" name="name" id="exampleFormControlInput1"
-                placeholder="nama">
+                placeholder="nama" required>
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
@@ -60,11 +60,11 @@
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Nama Agenda</label>
             <input type="text" name="name" class="form-control" name="name" id="exampleFormControlInput1"
-            placeholder="nama">
+            placeholder="nama" required>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-            <textarea placeholder="Deskipsikan agenda yang anda buat" name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea placeholder="Deskipsikan agenda yang anda buat" name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
           </div> 
 
         </div>    

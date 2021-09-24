@@ -34,6 +34,7 @@ class HomeController extends Controller
             'event' => $this->Query->GetEvent('tb_acara', 'id_group', session('group')['id_group']),
             'grafik' => $this->logic->getGrafik(),
             'list' => $this->Query->keuangan('tb_keuangan', 'id_group', session('group')['id_group']),
+            'agenda'=>$this->Query->getWhere('tb_agenda','id_group',session('group')['id_group'])
         ]);
     }
 
@@ -63,6 +64,7 @@ class HomeController extends Controller
         $event = $this->Query->GetEvent('tb_acara', 'id_group', session('group')['id_group']);
         $grafik = $this->logic->getGrafik();
         $list = $this->Query->keuangan('tb_keuangan', 'id_group', session('group')['id_group']);
+        $agenda=$this->Query->getWhere('tb_agenda','id_group',session('group')['id_group']);
         $request->session()->forget('group');
         return view('home', [
             'group' => $group,
@@ -71,6 +73,7 @@ class HomeController extends Controller
             'event' => $event,
             'grafik' => $grafik,
             'list' => $list,
+            'agenda'=>$agenda
         ]);
     }
 
